@@ -17,7 +17,7 @@
   --spacing-sm: 0.75rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
+  --spacing-xl: 6rem;
   --spacing-xxl: 2.5rem;
   
   /* Responsive font sizes */
@@ -56,6 +56,7 @@
 /* Sidebar */
 .projects-sidebar {
   position: sticky;
+  top: 6rem;
   top: var(--spacing-xl);
   background: var(--card-bg);
   border-radius: 16px;
