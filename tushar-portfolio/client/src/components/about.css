@@ -248,8 +248,8 @@
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   text-align: center;
 }
 
@@ -774,8 +774,11 @@
 }
 
 /* Certifications Section */
+/* Fixed Certifications Section - Replace your existing certifications CSS with this */
+
 .certifications-section {
   margin-bottom: 160px;
+  margin-top: 80px; /* Add proper top margin for spacing */
   transform: translateY(40px);
   opacity: 0;
   transition: all 1s ease-out 500ms;
@@ -785,18 +788,21 @@
 @media (max-width: 1024px) {
   .certifications-section {
     margin-bottom: 100px;
+    margin-top: 60px;
   }
 }
 
 @media (max-width: 768px) {
   .certifications-section {
     margin-bottom: 80px;
+    margin-top: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .certifications-section {
     margin-bottom: 60px;
+    margin-top: 30px;
   }
 }
 
@@ -805,10 +811,11 @@
   opacity: 1;
 }
 
+/* Fixed the decorative line positioning */
 .certifications-section::before {
   content: '';
   position: absolute;
-  top: -50px;
+  top: -20px; 
   left: 50%;
   transform: translateX(-50%);
   width: 200px;
@@ -820,9 +827,58 @@
 @media (max-width: 768px) {
   .certifications-section::before {
     width: 150px;
-    top: -30px;
+    top: -20px; /* Reduced from -30px for mobile */
   }
 }
+
+/* Make sure section header is consistent with experience section */
+.certifications-section .section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .certifications-section .section-header {
+    margin-bottom: 32px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certifications-section .section-header {
+    margin-bottom: 24px;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Icon styling for certifications section */
+.certifications-section .section-icon {
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #00887A, #77A6F7);
+  color: white;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .certifications-section .section-icon {
+    padding: 10px;
+  }
+}
+
+/* Title styling for certifications section */
+.certifications-section .section-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: bold;
+  color: #00887A;
+}
+
+/* Rest of your certificate card styles remain the same... */
 
 /* Certificate grid container */
 .cert-container {
@@ -1500,7 +1556,7 @@
   
   .stats-card,
   .card-content {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.856);
     backdrop-filter: blur(10px);
   }
 }

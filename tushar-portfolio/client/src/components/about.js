@@ -230,13 +230,7 @@ function About() {
             <div className="stats-container">
               <div className="stats-card">
                 <div className="stats-grid">
-                  {/* <div className="stat-item">
-                    <div className="stat-icon" style={{background: 'linear-gradient(45deg, #00887A, #00887Acc)'}}>
-                      <Calendar className="icon" />
-                    </div>
-                    <div className="stat-number" style={{color: '#00887A'}}>Fresher</div>
-                    <div className="stat-label">Years</div>
-                  </div> */}
+                   
                   <div className="stat-item">
                     <div className="stat-icon" style={{ background: 'linear-gradient(45deg, #77A6F7, #77A6F7cc)' }}>
                       <Code className="icon" />

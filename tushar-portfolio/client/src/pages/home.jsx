@@ -5,6 +5,7 @@ import Projects from '../components/projects';
 import Contact from '../components/contact';
 
 
+
 import {
   ChevronDown,
   Github,
@@ -52,7 +53,7 @@ function Home() {
     "Simplicity is the ultimate sophistication.",
     "Behind every line of code lies a story only logic can tell.",
     "Every bug is a lesson in disguise.",
-    
+
   ];
 
 
@@ -346,7 +347,10 @@ function Home() {
               <span>View My Work</span>
               <ArrowRight className="btn-icon" />
             </button>
-            <button className="btn-secondary">
+            <button
+              className="btn-secondary"
+              onClick={() => window.open('/resume.pdf', '_blank')}
+            >
               <Download className="btn-icon" />
               <span>Download Resume</span>
             </button>
