@@ -174,7 +174,7 @@ function About() {
       date: "July 14, 2024",
       credentialId: "df2678cc-59da-4a63-90ec-19ab60f7f118",
       link: "https://www.credly.com/badges/df2678cc-59da-4a63-90ec-19ab60f7f118/linked_in_profile",
-      icon: "Code",
+      icon: Code,
       color: "#00887A",
       priority: "high"
     },
