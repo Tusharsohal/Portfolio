@@ -1,10 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ExternalLink, Github, Calendar, Users, Code, Target, CheckCircle } from 'lucide-react';
 import "./projects.css";
 
 function DetailedProjects() {
   const [activeProject, setActiveProject] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1023);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const projects = [
     {
@@ -26,7 +39,7 @@ function DetailedProjects() {
         "Social media integration (Instagram, Youtube, etc.) to increase visibility"
       ],
       github: "https://github.com/Tusharsohal?tab=repositories",
-      live: "https://palettepath-frontend-naq9.onrender.com "
+      live: "https://palettepath-frontend-naq9.onrender.com"
     },
     {
       id: 2,
@@ -72,6 +85,7 @@ function DetailedProjects() {
     }
   ];
 
+  // Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -82,71 +96,127 @@ function DetailedProjects() {
       { threshold: 0.1 }
     );
 
-    const section = document.getElementById('detailed-projects');
+    const section = document.getElementById('projects');
     if (section) observer.observe(section);
 
     return () => observer.disconnect();
   }, []);
 
-  const handleProjectSelect = (index) => {
-    setActiveProject(index);
-  };
+  // Handle project selection with smooth transitions
+  const handleProjectSelect = useCallback((index) => {
+    if (index !== activeProject) {
+      setActiveProject(index);
+      
+      // Scroll to top of project details on mobile
+      if (isMobile) {
+        const projectDetails = document.querySelector('.project-details');
+        if (projectDetails) {
+          projectDetails.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      }
+    }
+  }, [activeProject, isMobile]);
 
-  const getStatusClass = (status) => {
+  // Get status class helper
+  const getStatusClass = useCallback((status) => {
     return status === 'Completed' ? 'status-completed' : 'status-development';
-  };
+  }, []);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'ArrowUp' && activeProject > 0) {
+        e.preventDefault();
+        handleProjectSelect(activeProject - 1);
+      } else if (e.key === 'ArrowDown' && activeProject < projects.length - 1) {
+        e.preventDefault();
+        handleProjectSelect(activeProject + 1);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [activeProject, projects.length, handleProjectSelect]);
 
   const currentProject = projects[activeProject];
 
   return (
-    <section id="projects" className="projects-detailed-view">
+    <section 
+      id="projects" 
+      className="projects-detailed-view"
+      role="main"
+      aria-label="Projects showcase"
+    >
       <div className="projects-container">
         
         {/* Sidebar */}
-        <div className="projects-sidebar">
+        <aside 
+          className="projects-sidebar"
+          role="navigation"
+          aria-label="Project navigation"
+        >
           <div className="sidebar-header">
-            <h3 className="sidebar-title">Projects</h3>
-            <p className="sidebar-subtitle">Click to explore each project</p>
+            <h2 className="sidebar-title">Projects</h2>
+            <p className="sidebar-subtitle">
+              {isMobile ? 'Swipe to explore projects' : 'Click to explore each project'}
+            </p>
           </div>
           
-          <div className="project-list">
+          <nav className="project-list" role="tablist">
             {projects.map((project, index) => (
-              <div
+              <button
                 key={project.id}
                 className={`project-item ${index === activeProject ? 'active' : ''}`}
                 onClick={() => handleProjectSelect(index)}
+                role="tab"
+                aria-selected={index === activeProject}
+                aria-controls={`project-panel-${project.id}`}
+                tabIndex={index === activeProject ? 0 : -1}
+                type="button"
               >
                 <div className="project-item-company">{project.company}</div>
                 <div className="project-item-role">{project.role}</div>
                 <div className="project-item-duration">{project.duration}</div>
-              </div>
+              </button>
             ))}
-          </div>
-        </div>
+          </nav>
+        </aside>
 
         {/* Main Project Details */}
-        <div className="project-details">
+        <main 
+          className="project-details"
+          role="tabpanel"
+          id={`project-panel-${currentProject.id}`}
+          aria-labelledby={`project-tab-${currentProject.id}`}
+        >
           
-          <div className="project-header">
+          <header className="project-header">
             <div className="project-title-section">
               <div className="project-company">{currentProject.company}</div>
               <h1>{currentProject.title}</h1>
               <div className="project-meta-info">
                 <div className="meta-item">
-                  <Calendar size={16} />
+                  <Calendar size={16} aria-hidden="true" />
                   <span>{currentProject.duration}</span>
                 </div>
                 <div className="meta-item">
-                  <Users size={16} />
+                  <Users size={16} aria-hidden="true" />
                   <span>{currentProject.team}</span>
                 </div>
               </div>
             </div>
             
-            <div className={`status-badge ${getStatusClass(currentProject.status)}`}>
+            <div 
+              className={`status-badge ${getStatusClass(currentProject.status)}`}
+              role="status"
+              aria-label={`Project status: ${currentProject.status}`}
+            >
               {currentProject.status}
             </div>
-          </div>
+          </header>
 
           
           <div className="project-content">
@@ -155,51 +225,67 @@ function DetailedProjects() {
             </div>
 
             
-            <div className="achievements-section">
+            <section className="achievements-section">
               <h3 className="section-title1">
-                <Target className="achievement-icon" />
+                <Target className="achievement-icon" aria-hidden="true" />
                 Key Achievements
               </h3>
               <div className="achievements-grid">
                 {currentProject.achievements.map((achievement, index) => (
                   <div key={index} className="achievement-card">
                     <div className="achievement-text">
-                      <CheckCircle className="achievement-icon" />
-                      {achievement}
+                      <CheckCircle className="achievement-icon" aria-hidden="true" />
+                      <span>{achievement}</span>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
 
             
-            <div className="technologies-section">
+            <section className="technologies-section">
               <h3 className="section-title1">
-                <Code size={20} />
+                <Code size={20} aria-hidden="true" />
                 Technologies Used
               </h3>
-              <div className="tech-grid">
+              <div className="tech-grid" role="list">
                 {currentProject.technologies.map((tech, index) => (
-                  <span key={index} className="tech-tag">
+                  <span 
+                    key={index} 
+                    className="tech-tag"
+                    role="listitem"
+                  >
                     {tech}
                   </span>
                 ))}
               </div>
-            </div>
+            </section>
           </div>
 
           
-          <div className="project-actions">
-            <a href={currentProject.github} className="action-button secondary">
-              <Github size={16} />
-              View Code
+          <footer className="project-actions">
+            <a 
+              href={currentProject.github} 
+              className="action-button secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View source code for ${currentProject.title} on GitHub`}
+            >
+              <Github size={16} aria-hidden="true" />
+              <span>View Code</span>
             </a>
-            <a href={currentProject.live} className="action-button primary">
-              <ExternalLink size={16} />
-              Live Demo
+            <a 
+              href={currentProject.live} 
+              className="action-button primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View live demo of ${currentProject.title}`}
+            >
+              <ExternalLink size={16} aria-hidden="true" />
+              <span>Live Demo</span>
             </a>
-          </div>
-        </div>
+          </footer>
+        </main>
       </div>
     </section>
   );
