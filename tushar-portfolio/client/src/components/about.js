@@ -97,6 +97,27 @@ function About() {
 
   const experiences = [
     {
+      company: "Lorn Krishna Convent School",
+      role: "Software Developer Intern",
+      duration: "June 2025 - Present",
+      location: "Gurugram",
+      description: [
+        "Designed UI wireframes using Figma and built a desktop Library Management System using Electron.js",
+        "Developed responsive frontend using React.js, HTML/CSS, and JavaScript",
+        "Built secure backend using Node.js, Express.js, and SQLite with RESTful APIs",
+        "Integrated Excel import/export functionality for books and students using SheetJS",
+        "Implemented login with role-based dashboard, book issue/return, fine tracking, and analytics"
+      ],
+      technologies: ["React.js", "Node.js", "Express.js", "SQLite", "SheetJS", "Figma", "Electron.js"],
+      achievements: [
+        "Excel-based data import/export system",
+        "Fine tracking and due date automation",
+        "Role-based dashboard and secure login system",
+        "Interactive analytics dashboard for usage insights"
+      ],
+      color: "#FFCCBC"
+    },
+    {
       company: "BVICAM - (Software Consultancy Development Cell )",
       role: "Full Stack Developer ",
       duration: "Jan 2025 - Mar 2025",
@@ -230,7 +251,7 @@ function About() {
             <div className="stats-container">
               <div className="stats-card">
                 <div className="stats-grid">
-                   
+
                   <div className="stat-item">
                     <div className="stat-icon" style={{ background: 'linear-gradient(45deg, #77A6F7, #77A6F7cc)' }}>
                       <Code className="icon" />
