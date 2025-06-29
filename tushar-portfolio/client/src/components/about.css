@@ -778,7 +778,7 @@
 
 .certifications-section {
   margin-bottom: 160px;
-  margin-top: 80px; /* Add proper top margin for spacing */
+  margin-top:210px; /* Add proper top margin for spacing */
   transform: translateY(40px);
   opacity: 0;
   transition: all 1s ease-out 500ms;
@@ -788,7 +788,7 @@
 @media (max-width: 1024px) {
   .certifications-section {
     margin-bottom: 100px;
-    margin-top: 60px;
+    margin-top: 100px;
   }
 }
 
