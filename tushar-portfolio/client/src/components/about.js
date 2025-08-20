@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Award, Briefcase, Code, Calendar, MapPin, Star, ExternalLink, TrendingUp, Zap, Trophy, Coffee, TerminalSquare } from 'lucide-react';
+import { Award, Briefcase, Code, Calendar, MapPin, Star, ExternalLink,  Zap, Trophy, Coffee } from 'lucide-react';
 import './about.css';
 import { useRef } from 'react';
 function About() {
@@ -102,13 +102,14 @@ function About() {
       duration: "June 2025 - Present",
       location: "Gurugram",
       description: [
-        "Designed UI wireframes using Figma and built a desktop Library Management System using Electron.js",
-        "Developed responsive frontend using React.js, HTML/CSS, and JavaScript",
-        "Built secure backend using Node.js, Express.js, and SQLite with RESTful APIs",
-        "Integrated Excel import/export functionality for books and students using SheetJS",
-        "Implemented login with role-based dashboard, book issue/return, fine tracking, and analytics"
+        "Designed UI in Figma and developed a desktop-based Library Management System using Electron.js.",
+        "Built frontend using React.js, HTML/CSS, and JavaScript, with backend in Node.js + Express.js and SQLite for data storage.",
+        "Integrated Excel Import/Export for Books & Students using SheetJS (xlsx)",
+        "Designed and developed the official LKCS school website using the MERN stack",
+        "Deployed frontend on Vercel and backend on Render, with MongoDB Atlas for database and Cloudinary for media storage.",
+        "Configured and deployed the official domain via GoDaddy"
       ],
-      technologies: ["React.js", "Node.js", "Express.js", "SQLite", "SheetJS", "Figma", "Electron.js"],
+      technologies: ["React.js", "Node.js", "Express.js", "SQLite", "MongoDB", "SheetJS", "Figma", "Electron.js"],
       achievements: [
         "Excel-based data import/export system",
         "Fine tracking and due date automation",
