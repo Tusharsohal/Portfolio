@@ -21,7 +21,7 @@ function Home() {
   };
 
   const handleResumeDownload = () => {
-    window.open('/Tushar_Sohal_resume.pdf', '_blank');
+    window.open('/resume.pdf', '_blank');
   };
 
   return (
