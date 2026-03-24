@@ -72,15 +72,16 @@ function Home() {
               <span className="name-hi">Hi, I'm</span>
               <span className="name-main">Tushar</span>
               <span className="name-role">
-                I build <em>scalable</em><br />systems.
+                Backend-first <em>full-stack</em><br />developer.
               </span>
             </motion.h1>
 
             {/* subtitle */}
             <motion.p className="hero-subtitle" {...fadeUp(0.38)}>
-              Backend-first full-stack developer crafting secure,
-              production-grade applications — from REST APIs to
-              real-time dashboards.
+              Currently building defence-grade systems for the Indian Army
+              at UPSALA DefSol. Previously shipped production platforms at
+              LKCS (1,000+ daily users) and a live payment system for a
+              Springer Nature journal.
             </motion.p>
 
             {/* tech stack */}
@@ -149,8 +150,8 @@ function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.0, duration: 0.5 }}
               >
-                <span className="badge-num">3+</span>
-                <span className="badge-label">Yrs<br />Exp</span>
+                <span className="badge-num">1yr+</span>
+                <span className="badge-label">Prod<br />Exp</span>
               </motion.div>
 
               <div className="image-inner">
@@ -201,8 +202,10 @@ function Home() {
             {[
               'React', 'Node.js', 'FastAPI', 'PostgreSQL', 'MongoDB',
               'JWT', 'RBAC', 'REST APIs', 'System Design', 'Angular',
+              'Python', 'Electron.js', 'Swagger', 'Express.js', 'MySQL',
               'React', 'Node.js', 'FastAPI', 'PostgreSQL', 'MongoDB',
               'JWT', 'RBAC', 'REST APIs', 'System Design', 'Angular',
+              'Python', 'Electron.js', 'Swagger', 'Express.js', 'MySQL',
             ].map((t, i) => (
               <span key={i} className="marquee-item">
                 {t} <span className="marquee-dot">·</span>
