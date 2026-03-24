@@ -1,174 +1,195 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './skills.css';
 
 function Skills() {
-  const skills = {
-    primary: [
-      { name: 'Node.js' },
-      { name: 'FastAPI' },
-      { name: 'PostgreSQL' },
-      { name: 'REST API Design' },
-      { name: 'JWT Authentication' },
-      { name: 'RBAC' },
-      { name: 'JavaScript' },
-      { name: 'Python' },
-      { name: 'SQL' }
-    ],
-    secondary: [
-      { name: 'React.js' },
-      { name: 'Next.js' },
-      { name: 'Angular' },
-      { name: 'MongoDB' },
-      { name: 'MySQL' },
-      { name: 'SQLite' },
-      { name: 'Swagger / OpenAPI' }
-    ],
-    tools: [
-      { name: 'Git' },
-      { name: 'Postman' },
-      { name: 'CI/CD basics' },
-      { name: 'Unit Testing' },
-      { name: 'Render' },
-      { name: 'Vercel' }
-    ]
-  };
+  const [isVisible, setIsVisible]       = useState(false);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.05 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const categories = [
+    { id: 'all',      label: 'All Skills', num: '00' },
+    { id: 'lang',     label: 'Languages',  num: '01' },
+    { id: 'backend',  label: 'Backend',    num: '02' },
+    { id: 'frontend', label: 'Frontend',   num: '03' },
+    { id: 'database', label: 'Databases',  num: '04' },
+    { id: 'devops',   label: 'DevOps & Tools', num: '05' },
+    { id: 'concepts', label: 'Concepts',   num: '06' },
+  ];
+
+  const skills = [
+    // Languages
+    { name: 'JavaScript',  cat: 'lang',     level: 'Expert' },
+    { name: 'Python',      cat: 'lang',     level: 'Proficient' },
+    { name: 'SQL',         cat: 'lang',     level: 'Proficient' },
+    { name: 'TypeScript',  cat: 'lang',     level: 'Familiar' },
+    { name: 'C#',          cat: 'lang',     level: 'Familiar' },
+    { name: 'HTML5',       cat: 'lang',     level: 'Expert' },
+    { name: 'CSS3',        cat: 'lang',     level: 'Expert' },
+
+    // Backend
+    { name: 'Node.js',     cat: 'backend',  level: 'Expert' },
+    { name: 'FastAPI',     cat: 'backend',  level: 'Expert' },
+    { name: 'Express.js',  cat: 'backend',  level: 'Expert' },
+    { name: 'REST API Design', cat: 'backend', level: 'Expert' },
+    { name: 'ASP.NET MVC', cat: 'backend',  level: 'Familiar' },
+    { name: 'Microservices', cat: 'backend', level: 'Proficient' },
+    { name: 'Swagger / OpenAPI', cat: 'backend', level: 'Proficient' },
+    { name: 'OAuth',       cat: 'backend',  level: 'Proficient' },
+
+    // Frontend
+    { name: 'React.js',    cat: 'frontend', level: 'Expert' },
+    { name: 'Next.js',     cat: 'frontend', level: 'Expert' },
+    { name: 'Angular',     cat: 'frontend', level: 'Expert' },
+    { name: 'Tailwind CSS', cat: 'frontend', level: 'Expert' },
+    { name: 'Electron.js', cat: 'frontend', level: 'Proficient' },
+
+    // Databases
+    { name: 'PostgreSQL',  cat: 'database', level: 'Expert' },
+    { name: 'MongoDB',     cat: 'database', level: 'Expert' },
+    { name: 'MySQL',       cat: 'database', level: 'Proficient' },
+    { name: 'SQLite',      cat: 'database', level: 'Proficient' },
+    { name: 'MongoDB Atlas', cat: 'database', level: 'Proficient' },
+    { name: 'Schema Design', cat: 'database', level: 'Expert' },
+    { name: 'Query Optimisation', cat: 'database', level: 'Proficient' },
+
+    // DevOps & Tools
+    { name: 'Git',         cat: 'devops',   level: 'Expert' },
+    { name: 'Postman',     cat: 'devops',   level: 'Expert' },
+    { name: 'Figma',       cat: 'devops',   level: 'Proficient' },
+    { name: 'CI/CD',       cat: 'devops',   level: 'Familiar' },
+    { name: 'Unit Testing', cat: 'devops',  level: 'Proficient' },
+    { name: 'Vercel',      cat: 'devops',   level: 'Expert' },
+    { name: 'Render',      cat: 'devops',   level: 'Proficient' },
+    { name: 'Cloudinary',  cat: 'devops',   level: 'Proficient' },
+    { name: 'SheetJS / xlsx', cat: 'devops', level: 'Proficient' },
+
+    // Concepts
+    { name: 'JWT Authentication', cat: 'concepts', level: 'Expert' },
+    { name: 'RBAC',        cat: 'concepts', level: 'Expert' },
+    { name: 'System Design', cat: 'concepts', level: 'Proficient' },
+    { name: 'Database Normalisation', cat: 'concepts', level: 'Expert' },
+    { name: 'Secure Architecture', cat: 'concepts', level: 'Expert' },
+    { name: 'API Performance', cat: 'concepts', level: 'Expert' },
+    { name: 'Responsive Design', cat: 'concepts', level: 'Proficient' },
+    { name: 'Real-time Dashboards', cat: 'concepts', level: 'Proficient' },
+  ];
+
+  const stats = [
+    { value: '1+',    label: 'Year Professional Exp.' },
+    { value: '4',     label: 'Production Projects' },
+    { value: '40+',   label: 'Skills Across Stack' },
+    { value: 'MERN',  label: '+ FastAPI + Angular' },
+  ];
+
+  const filtered = activeCategory === 'all'
+    ? skills
+    : skills.filter(s => s.cat === activeCategory);
+
+  const levelOrder = { Expert: 0, Proficient: 1, Familiar: 2 };
+  const sorted = [...filtered].sort((a, b) => levelOrder[a.level] - levelOrder[b.level]);
 
   return (
-    <section id="skills" className="skills-section">
-      <div className="container">
-        <header className="section-header">
-          <h2 className="section-title">Skills</h2>
-          <p className="section-subtitle">
-            Focused on secure backend systems, API design, and scalable databases for production environments.
-          </p>
-        </header>
+    <section id="skills" className="sk-root" ref={sectionRef}>
 
-        <div className="skills-grid">
-          <div className="skill-category">
-            <h3 className="category-title">
-              <span className="category-indicator primary"></span>
-              Primary Skills
-            </h3>
-            <p className="category-description">
-              Core technologies I use daily for production systems
-            </p>
-            <div className="skill-tags">
-              {skills.primary.map((skill, index) => (
-                <span key={index} className="skill-tag primary">
-                  {skill.name}
-                </span>
-              ))}
-            </div>
-          </div>
+      {/* Grain */}
+      <div className="sk-grain" aria-hidden="true" />
 
-          <div className="skill-category">
-            <h3 className="category-title">
-              <span className="category-indicator secondary"></span>
-              Secondary Skills
-            </h3>
-            <p className="category-description">
-              Frontend and supporting technologies I work with regularly
-            </p>
-            <div className="skill-tags">
-              {skills.secondary.map((skill, index) => (
-                <span key={index} className="skill-tag secondary">
-                  {skill.name}
-                </span>
-              ))}
-            </div>
-          </div>
+      {/* Ghost word */}
+      <div className="sk-ghost" aria-hidden="true">SKILLS</div>
 
-          <div className="skill-category">
-            <h3 className="category-title">
-              <span className="category-indicator tools"></span>
-              Tools & Platforms
-            </h3>
-            <p className="category-description">
-              Development tools and cloud platforms I'm proficient with
-            </p>
-            <div className="skill-tags">
-              {skills.tools.map((skill, index) => (
-                <span key={index} className="skill-tag tools">
-                  {skill.name}
-                </span>
-              ))}
-            </div>
+      {/* Separator */}
+      <div className="sk-separator" aria-hidden="true" />
+
+      {/* ── Stats row ── */}
+      <div className={`sk-stats ${isVisible ? 'sk-visible' : ''}`}>
+        {stats.map((s, i) => (
+          <div key={i} className="sk-stat" style={{ transitionDelay: `${i * 80}ms` }}>
+            <span className="sk-stat-value">{s.value}</span>
+            <span className="sk-stat-label">{s.label}</span>
           </div>
+        ))}
+      </div>
+
+      {/* Section label */}
+      <div className={`sk-section-label ${isVisible ? 'sk-visible' : ''}`}>
+        <span className="sk-label-num">04</span>
+        <span className="sk-label-line" />
+        <span className="sk-label-text">Skills & Stack</span>
+      </div>
+
+      {/* Heading */}
+      <div className={`sk-heading-row ${isVisible ? 'sk-visible' : ''}`}>
+        <h2 className="sk-heading">
+          <span className="sk-heading-solid">What I</span>
+          <span className="sk-heading-italic"> bring.</span>
+        </h2>
+        <p className="sk-sub">
+          Full-stack engineer focused on secure backend systems, clean API design,
+          and production-grade databases — with strong frontend range to ship complete products end-to-end.
+        </p>
+      </div>
+
+      {/* ── Category filter tabs ── */}
+      <div className={`sk-filters ${isVisible ? 'sk-visible' : ''}`}>
+        {categories.map(cat => (
+          <button
+            key={cat.id}
+            className={`sk-filter-btn ${activeCategory === cat.id ? 'sk-filter-btn--active' : ''}`}
+            onClick={() => setActiveCategory(cat.id)}
+          >
+            <span className="sk-filter-num">{cat.num}</span>
+            <span className="sk-filter-label">{cat.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* ── Skills grid ── */}
+      <div className={`sk-grid ${isVisible ? 'sk-visible' : ''}`}>
+        {sorted.map((skill, i) => (
+          <div
+            key={`${skill.cat}-${skill.name}`}
+            className={`sk-skill-card sk-skill-card--${skill.cat} sk-skill-card--${skill.level.toLowerCase()}`}
+            style={{ animationDelay: `${i * 28}ms` }}
+          >
+            <div className="sk-skill-top">
+              <span className="sk-skill-cat-dot" />
+              <span className="sk-skill-level">{skill.level}</span>
+            </div>
+            <span className="sk-skill-name">{skill.name}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Legend ── */}
+      <div className={`sk-legend ${isVisible ? 'sk-visible' : ''}`}>
+        <div className="sk-legend-title">Proficiency</div>
+        <div className="sk-legend-items">
+          {['Expert', 'Proficient', 'Familiar'].map(l => (
+            <span key={l} className={`sk-legend-item sk-legend-item--${l.toLowerCase()}`}>
+              <span className="sk-legend-dot" />
+              {l}
+            </span>
+          ))}
         </div>
-
-        <div className="skills-summary">
-          <div className="summary-card">
-            <h4>Backend Focus</h4>
-            <p>Strong in Node.js, FastAPI, PostgreSQL, and secure API design with JWT/RBAC</p>
-          </div>
-          <div className="summary-card">
-            <h4>Full-Stack Capability</h4>
-            <p>Comfortable with React, Next.js, and end-to-end system architecture</p>
-          </div>
-          <div className="summary-card">
-            <h4>Production Experience</h4>
-            <p>Built and deployed secure, scalable systems for defence and product SaaS</p>
-          </div>
-        </div>
-
-        <div className="certifications-block">
-          <h3 className="certifications-title">Certifications & Formal Training</h3>
-          <p className="certifications-subtitle">
-            Industry-recognized coursework supporting backend and full-stack expertise
-          </p>
-          <div className="certifications-grid">
-            {[
-              {
-                title: "Backend Development for .Net Full Stack",
-                issuer: "Coursera-Board infinity",
-                date: "Apr 24, 2025",
-                relevance: "Backend architecture, APIs, authentication, and database-driven applications.",
-                link: "https://coursera.org/verify/4CXCN2FKIP79",
-                category: "core"
-              },
-              {
-                title: "Frontend Development using React",
-                issuer: "Coursera-Board infinity",
-                date: "Feb 23, 2025",
-                relevance: "Component-driven UI development and integration with REST APIs.",
-                link: "https://coursera.org/verify/3K5EQI7A7GS1",
-                category: "core"
-              },
-              {
-                title: "Python Data Structures",
-                issuer: "University of Michigan",
-                date: "May 29 2021",
-                relevance: "Algorithmic thinking, data handling, and backend problem-solving foundations.",
-                link: "https://coursera.org/verify/4RWV2K47MVX7",
-                category: "foundations"
-              },
-              {
-                title: "Web Development Fundamentals",
-                issuer: "IBM SkillsBuild",
-                date: "July 14, 2024",
-                relevance: "Core web concepts: HTTP, client–server model, and browser behavior.",
-                link: "https://www.credly.com/badges/df2678cc-59da-4a63-90ec-19ab60f7f118/linked_in_profile",
-                category: "foundations"
-              }
-            ].map((cert, index) => (
-              <a
-                key={index}
-                href={cert.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`cert-card ${cert.category}`}
-              >
-                <div className="cert-content">
-                  <h4 className="cert-title">{cert.title}</h4>
-                  <p className="cert-meta">{cert.issuer} • {cert.date}</p>
-                  <p className="cert-relevance">{cert.relevance}</p>
-                </div>
-                <span className="cert-arrow">→</span>
-              </a>
-            ))}
-          </div>
+        <div className="sk-legend-cats">
+          {categories.filter(c => c.id !== 'all').map(c => (
+            <span key={c.id} className={`sk-legend-cat sk-legend-cat--${c.id}`}>
+              <span className="sk-legend-dot" />
+              {c.label}
+            </span>
+          ))}
         </div>
       </div>
+
     </section>
   );
 }

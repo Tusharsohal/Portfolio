@@ -1,496 +1,368 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Award, Briefcase, Code, Calendar, MapPin, Star, ExternalLink,  Zap, Trophy, Coffee } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import {
+  Code, Calendar, MapPin,
+  Star, ExternalLink, Zap, Trophy, ArrowRight
+} from 'lucide-react';
 import './about.css';
-import { useRef } from 'react';
+
 function About() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible,        setIsVisible]        = useState(false);
   const [activeExperience, setActiveExperience] = useState(0);
   const certContainerRef = useRef(null);
+  const sectionRef       = useRef(null);
 
   useEffect(() => {
-    setIsVisible(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.05 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
-  // Memoize the certificate click handler
   const initCertificateClicks = useCallback(() => {
     const certContainer = certContainerRef.current;
     const certCards = certContainer?.querySelectorAll('.cert-card');
+    if (!certContainer || !certCards?.length) return;
 
-    if (!certContainer || !certCards?.length) {
-      console.warn('Certificate elements not found');
-      return;
-    }
-
-    console.log('Found', certCards.length, 'certificate cards');
-
-    // Remove existing event listeners first
     certCards.forEach(card => {
       const newCard = card.cloneNode(true);
       card.parentNode.replaceChild(newCard, card);
     });
 
-    // Get the updated cards after cloning
-    const updatedCertCards = certContainer.querySelectorAll('.cert-card');
-
-    updatedCertCards.forEach(card => {
+    const updated = certContainer.querySelectorAll('.cert-card');
+    updated.forEach(card => {
       card.addEventListener('click', function (e) {
-        console.log('Certificate clicked!');
-
-        // Don't trigger if clicking on the credential link
-        if (e.target.closest('.cert-link')) {
-          e.stopPropagation();
-          return;
-        }
-
-        // Toggle clicked state
+        if (e.target.closest('.cert-link')) { e.stopPropagation(); return; }
         if (this.classList.contains('clicked')) {
           this.classList.remove('clicked');
           certContainer.classList.remove('has-focus');
           return;
         }
-
-        // Remove clicked from all cards
-        updatedCertCards.forEach(c => c.classList.remove('clicked'));
+        updated.forEach(c => c.classList.remove('clicked'));
         certContainer.classList.remove('has-focus');
-
-        // Add clicked to this card
         this.classList.add('clicked');
         certContainer.classList.add('has-focus');
       });
     });
 
-    const handleOutsideClick = (e) => {
-      if (!e.target.closest('.cert-card') && !e.target.closest('.cert-container')) {
-        updatedCertCards.forEach(c => c.classList.remove('clicked'));
+    const onOutside = e => {
+      if (!e.target.closest('.cert-card')) {
+        updated.forEach(c => c.classList.remove('clicked'));
         certContainer.classList.remove('has-focus');
       }
     };
-
-    const handleEscapeKey = (e) => {
+    const onEsc = e => {
       if (e.key === 'Escape') {
-        updatedCertCards.forEach(c => c.classList.remove('clicked'));
+        updated.forEach(c => c.classList.remove('clicked'));
         certContainer.classList.remove('has-focus');
       }
     };
-
-    document.addEventListener('click', handleOutsideClick);
-    document.addEventListener('keydown', handleEscapeKey);
-
-    // Return cleanup function
+    document.addEventListener('click', onOutside);
+    document.addEventListener('keydown', onEsc);
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener('click', onOutside);
+      document.removeEventListener('keydown', onEsc);
     };
   }, []);
 
   useEffect(() => {
-    if (isVisible) {
-      // Small delay to ensure DOM is fully rendered
-      const timeoutId = setTimeout(() => {
-        const cleanup = initCertificateClicks();
-        return cleanup;
-      }, 200);
-
-      return () => clearTimeout(timeoutId);
-    }
+    if (!isVisible) return;
+    const t = setTimeout(() => { const c = initCertificateClicks(); return c; }, 250);
+    return () => clearTimeout(t);
   }, [isVisible, initCertificateClicks]);
 
+  /* ══════════════════════════════════════
+     EXPERIENCE — accurate, verified data
+  ══════════════════════════════════════ */
   const experiences = [
     {
-      company: "Lorn Krishna Convent School",
-      role: "Software Developer Intern",
-      duration: "June 2025 - Present",
-      location: "Gurugram",
+      company:  'UPSALA DefSol & IT Services Pvt. Ltd.',
+      role:     'Web Developer',
+      duration: 'Sep 2025 – Present',
+      location: 'New Delhi',
+      type:     'Full-time',
+      impact:   'Indian Army · Prod',
       description: [
-        "Designed UI in Figma and developed a desktop-based Library Management System using Electron.js.",
-        "Built frontend using React.js, HTML/CSS, and JavaScript, with backend in Node.js + Express.js and SQLite for data storage.",
-        "Integrated Excel Import/Export for Books & Students using SheetJS (xlsx)",
-        "Designed and developed the official LKCS school website using the MERN stack",
-        "Deployed frontend on Vercel and backend on Render, with MongoDB Atlas for database and Cloudinary for media storage.",
-        "Configured and deployed the official domain via GoDaddy"
+        'Architecting secure REST APIs for a defence-grade intelligence and operations platform deployed at the Indian Army PMO office — handling sensitive multi-unit operational data at production scale.',
+        'Designed a multi-tier RBAC system enforcing strict unit-level data isolation — no unit can access another\'s data — combined with a hierarchical approval workflow where actions escalate upward through command tiers before execution.',
+        'Optimised PostgreSQL schemas for large-scale operational datasets visualised on real-time maps; executed database migrations and schema versioning under defence-compliant production protocols.',
+        'Built modular Angular + Next.js frontend components for real-time operational dashboards, integrating internal department APIs under strict data security constraints.',
       ],
-      technologies: ["React.js", "Node.js", "Express.js", "SQLite", "MongoDB", "SheetJS", "Figma", "Electron.js"],
+      technologies: ['FastAPI', 'PostgreSQL', 'Python', 'JWT', 'RBAC', 'Angular', 'Next.js'],
       achievements: [
-        "Excel-based data import/export system",
-        "Fine tracking and due date automation",
-        "Role-based dashboard and secure login system",
-        "Interactive analytics dashboard for usage insights"
+        { label: 'RBAC model',     value: 'Multi-tier'    },
+        { label: 'Approval chain', value: 'Hierarchical'  },
+        { label: 'Data isolation', value: 'Unit-level'    },
+        { label: 'Deployment',     value: 'Army · Prod'   },
       ],
-      color: "#FFCCBC"
     },
     {
-      company: "BVICAM - (Software Consultancy Development Cell )",
-      role: "Full Stack Developer ",
-      duration: "Jan 2025 - Mar 2025",
-      location: "New Delhi",
+      company:  'Lord Krishna Convent School',
+      role:     'Software Developer Intern',
+      duration: 'Jun 2024 – Aug 2025',
+      location: 'Gurugram',
+      type:     'Internship',
+      impact:   '1,000+ daily users',
       description: [
-        "Developed a subscription model for BIJIT Journal published by Springer Nature",
-        "Integrated Razorpay payment gateway for seamless subscription transactions",
-        "Built secure backend services using ASP.NET MVC and MySQL"
+        'Designed full system UI in Figma, then built a desktop Library Management System using Electron.js + React.js — automating book issuance, returns, overdue fine calculation, and reporting, cutting manual effort by ~85%.',
+        'Integrated Excel import/export via SheetJS for bulk student and book inventory data management, eliminating manual entry workflows entirely.',
+        'Built and deployed the official LKCS school website on the MERN stack — serving 1,000+ daily users — with Cloudinary media management, MongoDB Atlas, GoDaddy domain on Vercel + Render.',
+        'Implemented role-based access with secure login for staff, librarians, and administrators; built interactive analytics dashboards for real-time library and school data.',
       ],
-      technologies: ["ASP.NET MVC", "MySQL", "C#", "Razorpay"],
-      achievements: ["secure server-side session management", "Database optimization", "System architecture"],
-      color: "#77A6F7"
+      technologies: ['React.js', 'Node.js', 'Express.js', 'SQLite', 'MongoDB', 'Electron.js', 'SheetJS', 'Figma', 'Cloudinary'],
+      achievements: [
+        { label: 'Admin effort cut', value: '~85%'      },
+        { label: 'Daily users',      value: '1,000+'    },
+        { label: 'Pipeline',         value: 'Figma→Prod'},
+        { label: 'Stack',            value: 'MERN'      },
+      ],
     },
     {
-      company: "IBM",
-      role: "Frontend Developer",
-      duration: "Jun 2024 - Aug 2024",
-      location: "Remote",
-      description: [" Developed responsive UI components with React.js and Tailwind CSS",
-        " Collaborated on the AquaRevive sustainability project for water management",
-        "contributing key frontend features to improve overall product performance"
-
+      company:  'BVICAM — Software Consultancy Development Cell',
+      role:     'Full Stack Developer Intern',
+      duration: 'Jan 2025 – Mar 2025',
+      location: 'New Delhi',
+      type:     'Internship',
+      impact:   'Springer Nature · Live',
+      description: [
+        'Developed a subscription management system for BIJIT Journal — an academic publication by Springer Nature — handling user registration, plan selection, and end-to-end payment flows.',
+        'Integrated Razorpay payment gateway with server-side session management in ASP.NET MVC, preventing client-side tampering of transaction state across the full subscription lifecycle.',
+        'Designed and optimised normalised MySQL schemas for subscriber records, transaction logs, plan metadata, and access control — ensuring data integrity across concurrent subscription events.',
       ],
-      technologies: ["React.js", "HTML5", "CSS3", "Tailwind CSS", "JavaScript (ES6+)"],
-      achievements: ["responsive React components", "90+  performance score", "Collaborated with team of 5 developers using Git workflow"],
-      color: "#f778e2"
+      technologies: ['ASP.NET MVC', 'C#', 'MySQL', 'Razorpay', 'JavaScript'],
+      achievements: [
+        { label: 'Publisher',    value: 'Springer' },
+        { label: 'Payment GW',  value: 'Razorpay' },
+        { label: 'Session mgmt',value: 'Secure'   },
+        { label: 'DB',          value: 'MySQL'    },
+      ],
     },
-
-    {
-      company: "TechMihirNaik",
-      role: "Frontend Developer",
-      duration: "Aug 2021 - Nov 2021",
-      location: "Mumbai",
-      description: [" Developed and optimized UI components using HTML, CSS, and Bootstrap.",
-        "Designed responsive layouts, ensuring seamless user experience across devices"],
-      technologies: ["JavaScript", "CSS3", "HTML5", "Bootstrap"],
-      achievements: ["UI/UX improvements", "Mobile responsiveness", "Code optimization"],
-      color: "#FFCCBC"
-    }
   ];
+
+  /* ══════════════════════════════════════
+     CERTIFICATIONS
+  ══════════════════════════════════════ */
   const certifications = [
     {
-      title: "Backend Development for .Net Full Stack",
-      issuer: "Coursera-Board infinity",
-      date: "Apr 24, 2025",
-      credentialId: "4CXCN2FKIP79",
-      link: "https://coursera.org/verify/4CXCN2FKIP79",
-      icon: Trophy,
-      color: "#00887A",
-      priority: "high"
+      title: 'Backend Development for .NET Full Stack',
+      issuer: 'Coursera — Board Infinity',
+      date: 'Apr 24, 2025', credentialId: '4CXCN2FKIP79',
+      link: 'https://coursera.org/verify/4CXCN2FKIP79', icon: Trophy,
     },
     {
-      title: "Frontend Development using React",
-      issuer: "Coursera-board infinity",
-      date: "Feb 23, 2025",
-      credentialId: "3K5EQI7A7GS1",
-      link: "https://coursera.org/verify/3K5EQI7A7GS1",
-      icon: Star,
-      color: "#77A6F7",
-      priority: "high"
+      title: 'Frontend Development using React',
+      issuer: 'Coursera — Board Infinity',
+      date: 'Feb 23, 2025', credentialId: '3K5EQI7A7GS1',
+      link: 'https://coursera.org/verify/3K5EQI7A7GS1', icon: Star,
     },
     {
-      title: "Python Data Structures",
-      issuer: "University of Michigan",
-      date: "May 29 2021",
-      credentialId: "4RWV2K47MVX7",
-      link: "https://coursera.org/verify/4RWV2K47MVX7",
-      icon: Zap,
-      color: "#FFCCBC",
-      priority: "medium"
+      title: 'Python Data Structures',
+      issuer: 'University of Michigan',
+      date: 'May 29, 2021', credentialId: '4RWV2K47MVX7',
+      link: 'https://coursera.org/verify/4RWV2K47MVX7', icon: Zap,
     },
     {
-      title: "Web Development Fundamentals",
-      issuer: "IBM SkillsBuild",
-      date: "July 14, 2024",
-      credentialId: "df2678cc-59da-4a63-90ec-19ab60f7f118",
-      link: "https://www.credly.com/badges/df2678cc-59da-4a63-90ec-19ab60f7f118/linked_in_profile",
+      title: 'Web Development Fundamentals',
+      issuer: 'IBM SkillsBuild',
+      date: 'Jul 14, 2024', credentialId: 'df2678cc-59da',
+      link: 'https://www.credly.com/badges/df2678cc-59da-4a63-90ec-19ab60f7f118/linked_in_profile',
       icon: Code,
-      color: "#00887A",
-      priority: "high"
     },
-
   ];
 
-
   return (
+    <div className="ab-root" id="about" ref={sectionRef}>
+      <div className="ab-grain" aria-hidden="true" />
 
-    <div className="about-container" id="about" style={{ background: 'linear-gradient(135deg, #D3E3FC 0%, #E8F2FF 100%)' }}>
-      {/* Animated Background Elements */}
-      <div className="background-elements">
-        <div className="blob blob-1" style={{ background: 'linear-gradient(45deg, #77A6F7, #00887A)' }}></div>
-        <div className="blob blob-2" style={{ background: 'linear-gradient(45deg, #FFCCBC, #77A6F7)' }}></div>
-        <div className="blob blob-3" style={{ background: 'linear-gradient(45deg, #00887A, #D3E3FC)' }}></div>
+      {/* ══════════════════════════════
+          BAND 1 — INTRO  (Floral White)
+      ══════════════════════════════ */}
+      <div className="ab-band-intro">
+        <div className={`ab-section-label ${isVisible ? 'ab-visible' : ''}`}>
+          <span className="ab-label-num">01</span>
+          <span className="ab-label-line" />
+          <span className="ab-label-text">About</span>
+        </div>
+
+        <div className={`ab-intro ${isVisible ? 'ab-visible' : ''}`}>
+          <div className="ab-intro-left">
+            <h2 className="ab-intro-heading">
+              <span className="ab-heading-row">I build things</span>
+              <span className="ab-heading-row ab-heading-italic">that work</span>
+              <span className="ab-heading-row ab-heading-outline">at scale.</span>
+            </h2>
+          </div>
+
+          <div className="ab-intro-right">
+            <p className="ab-intro-body">
+              Full Stack Developer currently building secure, production-grade backend systems
+              for the <strong>Indian Army</strong> at UPSALA DefSol. I specialise in REST API
+              design, JWT/RBAC security architecture, and PostgreSQL optimisation — with
+              enough frontend range to own a product from Figma to deployment.
+            </p>
+            <p className="ab-intro-body">
+              Previously delivered production systems at LKCS serving
+              <strong> 1,000+ daily users</strong> and a live payment integration for a
+              <strong> Springer Nature</strong> academic journal. I build systems that are
+              secure by design, not by accident.
+            </p>
+
+            <div className="ab-stats-row">
+              {[
+                { num: '3',    label: 'Companies'  },
+                { num: '6+',   label: 'Projects'   },
+                { num: '4',    label: 'Certs'      },
+                { num: '1yr+', label: 'Experience' },
+              ].map(s => (
+                <div className="ab-stat" key={s.label}>
+                  <span className="ab-stat-num">{s.num}</span>
+                  <span className="ab-stat-label">{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="content-wrapper">
-        {/* Header Section */}
-        <div className={`header-section ${isVisible ? 'visible' : ''}`}>
-          <h2 className="main-title" style={{ background: 'linear-gradient(45deg, #00887A, #77A6F7)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>
-            About Me
-          </h2>
-          <div className="title-underline" style={{ background: 'linear-gradient(90deg, #00887A, #77A6F7)' }}></div>
+      {/* ══════════════════════════════
+          BAND 2 — EXPERIENCE  (Smoky)
+      ══════════════════════════════ */}
+      <div className="ab-band-exp" id="experience">
+        <div className={`ab-exp-wrap ${isVisible ? 'ab-visible' : ''}`}>
 
-          <div className="intro-grid">
-            <div className="intro-text">
-              <p className="intro-main">
-                <span style={{
-                  fontSize: '4rem',
-                  fontWeight: '800',
-                  background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
-                  backgroundSize: '400% 400%',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  animation: 'gradient 3s ease infinite',
-                  marginRight: '0.3em'
-                }}>Hi</span>, I’m
-                <span className="name-highlight" style={{ color: 'black', fontWeight: '600' }}> Tushar Sohal</span>,
-
-              </p>
-              <p className="intro-sub">
-                a curious developer who loves building digital experiences that are both functional and beautiful.
-                With real-world exposure at IBM, BVICAM(Software Consultancy Development Cell), and TechMihirNaik, I’ve built everything from subscription systems to portfolio platforms using React, Node.js, and .NET. Whether it's designing intuitive UIs or creating efficient backend APIs, I thrive on turning ideas into working products.
-              </p>
-
-            </div>
-
-
-
-            {/* Compact Stats */}
-            <div className="stats-container">
-              <div className="stats-card">
-                <div className="stats-grid">
-
-                  <div className="stat-item">
-                    <div className="stat-icon" style={{ background: 'linear-gradient(45deg, #77A6F7, #77A6F7cc)' }}>
-                      <Code className="icon" />
-                    </div>
-                    <div className="stat-number" style={{ color: '#77A6F7' }}>8+</div>
-                    <div className="stat-label">Projects</div>
-                  </div>
-                  <div className="stat-item">
-                    <div className="stat-icon" style={{ background: 'linear-gradient(45deg, #FFCCBC, #FFCCBCcc)' }}>
-                      <Award className="icon" />
-                    </div>
-                    <div className="stat-number" style={{ color: '#FFCCBC' }}>3</div>
-                    <div className="stat-label">Certs</div>
-                  </div>
-                  <div className="stat-item">
-                    <div className="stat-icon" style={{ background: 'linear-gradient(45deg, #00887A, #00887Acc)' }}>
-                      <Coffee className="icon" />
-                    </div>
-                    <div className="stat-number" style={{ color: '#00887A' }}>∞</div>
-                    <div className="stat-label">Coffee</div>
-                  </div>
-
-                </div>
-
-                {/* Animated progress bar */}
-                <div className="progress-container">
-                  <div className="progress-bar" style={{ background: 'linear-gradient(90deg, #00887A, #77A6F7, #FFCCBC)' }}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-        {/* Experience Section */}
-        <div className={`experience-section ${isVisible ? 'visible' : ''}`}>
-          <div className="section-header">
-            <div className="section-icon" style={{ background: 'linear-gradient(45deg, #00887A, #77A6F7)' }}>
-              <Briefcase className="icon-large" />
-            </div>
-            <h3 className="section-title">Professional Journey</h3>
+          <div className="ab-section-label ab-section-label--inline">
+            <span className="ab-label-num">02</span>
+            <span className="ab-label-line" />
+            <span className="ab-label-text">Experience</span>
           </div>
 
-          <div className="experience-grid">
-            {/* Experience Navigation */}
-            <div className="experience-nav">
-              <div className="nav-sticky">
-                {experiences.map((exp, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveExperience(index)}
-                    className={`nav-button ${activeExperience === index ? 'active' : ''}`}
-                    style={activeExperience === index ? { borderLeft: `4px solid ${exp.color}` } : {}}
-                  >
-                    <div className="nav-company">{exp.company}</div>
-                    <div className="nav-role">{exp.role}</div>
-                    <div className="nav-duration">{exp.duration}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
+          <div className="ab-exp-layout">
 
-            {/* Experience Details */}
-            <div className="experience-details">
-              <div className="details-container">
-                {experiences.map((exp, index) => (
-                  <div
-                    key={index}
-                    className={`experience-card ${activeExperience === index ? 'active' : ''}`}
-                  >
-                    <div className="card-border" style={{ background: `linear-gradient(135deg, ${exp.color}, ${exp.color}dd)` }}>
-                      <div className="card-content">
-                        <div className="card-header">
-                          <div className="header-left">
-                            <h4 className="role-title">{exp.role}</h4>
-                            <h5 className="company-name">{exp.company}</h5>
-                          </div>
-                          <div className="header-right">
-                            <div className="info-item">
-                              <Calendar className="info-icon" />
-                              <span className="info-text">{exp.duration}</span>
-                            </div>
-                            <div className="info-item">
-                              <MapPin className="info-icon" />
-                              <span className="info-text">{exp.location}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="description">
-                          {Array.isArray(exp.description) ? (
-                            exp.description.map((point, index) => (
-                              <p key={index}>• {point}</p>
-                            ))
-                          ) : (
-                            <p>{exp.description}</p>
-                          )}
-                        </div>
-
-                        <div className="achievements-section">
-                          <h6 className="achievements-title">Key Achievements:</h6>
-                          <div className="achievements-grid">
-                            {exp.achievements.map((achievement, achIndex) => (
-                              <div key={achIndex} className="achievement-item">
-                                <div className="achievement-dot" style={{ background: `linear-gradient(45deg, ${exp.color}, #77A6F7)` }}></div>
-                                <span className="achievement-text">{achievement}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="technologies-section">
-                          <h6 className="technologies-title">Technologies:</h6>
-                          <div className="technologies-list">
-                            {exp.technologies.map((tech, techIndex) => (
-                              <span
-                                key={techIndex}
-                                className="tech-tag"
-                                style={{ background: `linear-gradient(45deg, ${exp.color}, ${exp.color}cc)` }}
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Certifications Section */}
-        <div className={`certifications-section ${isVisible ? 'visible' : ''}`}>
-          <div className="section-header">
-            <div className="section-icon pulse-glow" style={{ background: 'linear-gradient(45deg, #00887A, #77A6F7)' }}>
-              <Award className="icon-large bounce-slow" />
-            </div>
-            <h3 className="section-title">Certifications & Achievements</h3>
-            <div className="section-line shimmer"></div>
-          </div>
-
-          <div ref={certContainerRef} className="cert-container">
-            {certifications.map((cert, index) => {
-              const IconComponent = cert.icon;
-              return (
-                <div
-                  key={index}
-                  className={`cert-card ${cert.priority === 'high' ? 'high-priority' : ''}`}
-                  style={{ animationDelay: `${index * 200}ms` }}
+            <nav className="ab-exp-nav" aria-label="Experience navigation">
+              {experiences.map((exp, i) => (
+                <button
+                  key={i}
+                  className={`ab-exp-btn ${activeExperience === i ? 'ab-exp-btn--active' : ''}`}
+                  onClick={() => setActiveExperience(i)}
                 >
-                  {/* Animated border */}
-                  <div className="cert-border" style={{
-                    background: `linear-gradient(45deg, ${cert.color}, #fff, ${cert.color})`,
-                    backgroundSize: '400% 400%'
-                  }}>
-                    <div className="cert-border-inner"></div>
+                  <span className="ab-exp-btn-idx">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="ab-exp-btn-body">
+                    <span className="ab-exp-btn-company">{exp.company}</span>
+                    <span className="ab-exp-btn-role">{exp.role}</span>
+                    <span className="ab-exp-btn-dur">{exp.duration}</span>
+                  </div>
+                  <ArrowRight size={12} className="ab-exp-btn-arrow" />
+                </button>
+              ))}
+            </nav>
+
+            <div className="ab-exp-detail">
+              {experiences.map((exp, i) => (
+                <div
+                  key={i}
+                  className={`ab-exp-panel ${activeExperience === i ? 'ab-exp-panel--active' : ''}`}
+                  aria-hidden={activeExperience !== i}
+                >
+                  <div className="ab-ep-header">
+                    <div className="ab-ep-title-block">
+                      <div className="ab-ep-meta-top">
+                        <span className="ab-ep-type">{exp.type}</span>
+                        <span className="ab-ep-location">
+                          <MapPin size={10} /> {exp.location}
+                        </span>
+                        <span className="ab-ep-dur">
+                          <Calendar size={10} /> {exp.duration}
+                        </span>
+                      </div>
+                      <h3 className="ab-ep-role">{exp.role}</h3>
+                      <p  className="ab-ep-company">{exp.company}</p>
+                    </div>
+                    <div className="ab-ep-impact">
+                      <span className="ab-ep-impact-value">{exp.impact}</span>
+                      <span className="ab-ep-impact-label">Key Impact</span>
+                    </div>
                   </div>
 
-                  {/* Main content */}
-                  <div className="cert-content">
-                    <div className="cert-bg" style={{ background: `linear-gradient(135deg, ${cert.color}, ${cert.color}cc)` }}></div>
+                  <div className="ab-ep-metrics">
+                    {exp.achievements.map((a, j) => (
+                      <div key={j} className="ab-ep-metric">
+                        <span className="ab-ep-metric-val">{a.value}</span>
+                        <span className="ab-ep-metric-label">{a.label}</span>
+                      </div>
+                    ))}
+                  </div>
 
-                    {/* Animated sparkles */}
-                    <div className="sparkles-container">
-                      {[...Array(3)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="sparkle"
-                          style={{
-                            left: `${20 + i * 30}%`,
-                            top: `${15 + i * 25}%`,
-                            animationDelay: `${i * 0.6}s`
-                          }}
-                        >
-                          <div className="sparkle-dot"></div>
-                        </div>
+                  <ul className="ab-ep-desc">
+                    {exp.description.map((d, j) => (
+                      <li key={j}>
+                        <span className="ab-ep-desc-arrow">→</span>
+                        <span>{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="ab-ep-stack">
+                    <span className="ab-ep-stack-label">Stack</span>
+                    <div className="ab-ep-tags">
+                      {exp.technologies.map((t, j) => (
+                        <span key={j} className="ab-ep-tag">{t}</span>
                       ))}
                     </div>
-
-                    <div className="cert-inner">
-                      <div className="cert-header">
-                        <div className="cert-icon">
-                          <IconComponent className="cert-icon-svg" />
-                        </div>
-                        <div className="cert-meta">
-                          <div className="cert-date fade-delayed">Issued {cert.date}</div>
-                          <div className="cert-id fade-delayed">ID: {cert.credentialId}</div>
-                        </div>
-                      </div>
-
-                      <h4 className="cert-title">{cert.title}</h4>
-                      <p className="cert-issuer">{cert.issuer}</p>
-
-                      <a
-                        href={cert.link}
-                        className="cert-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        View Credential <ExternalLink className="link-icon" />
-                      </a>
-                    </div>
-
-                    {/* Enhanced hover effects */}
-                    <div className="cert-overlay"></div>
-                    <div className="cert-line-top"></div>
-                    <div className="cert-line-bottom"></div>
                   </div>
+                </div>
+              ))}
+            </div>
 
-                  {/* 3D depth effect */}
-                  <div className="cert-shadow"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════
+          BAND 3 — CERTIFICATIONS (Bone)
+      ══════════════════════════════ */}
+      <div className="ab-band-cert" id="certifications">
+        <div className={`ab-cert-wrap ${isVisible ? 'ab-visible' : ''}`}>
+
+          <div className="ab-section-label ab-section-label--inline">
+            <span className="ab-label-num">03</span>
+            <span className="ab-label-line" />
+            <span className="ab-label-text">Certifications</span>
+          </div>
+
+          <div className="cert-container" ref={certContainerRef}>
+            {certifications.map((cert, i) => {
+              const Icon = cert.icon;
+              return (
+                <div key={i} className="cert-card" style={{ animationDelay: `${i * 120}ms` }}>
+                  <div className="cert-card-inner">
+                    <div className="cert-card-top">
+                      <div className="cert-icon-wrap"><Icon size={20} /></div>
+                      <div className="cert-card-meta">
+                        <span className="cert-date">Issued {cert.date}</span>
+                        <span className="cert-id">ID: {cert.credentialId}</span>
+                      </div>
+                    </div>
+                    <h4 className="cert-title">{cert.title}</h4>
+                    <p  className="cert-issuer">{cert.issuer}</p>
+                    <a
+                      href={cert.link}
+                      className="cert-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      View Credential <ExternalLink size={12} />
+                    </a>
+                    <div className="cert-corner" aria-hidden="true" />
+                  </div>
                 </div>
               );
             })}
           </div>
-
-          {/* Achievement counter animation */}
-          {/* <div className="counter-section">
-            <div className="counter-card float">
-              <Trophy className="counter-icon spin-slow" />
-              <span className="counter-number count-up" style={{color: '#00887A'}}>
-                {certifications.length}
-              </span>
-              <span className="counter-text">
-                Professional Certifications Earned
-              </span>
-              <Award className="counter-icon-right bounce-delayed" />
-            </div>
-          </div> */}
         </div>
-
-
-
       </div>
+
     </div>
   );
 }

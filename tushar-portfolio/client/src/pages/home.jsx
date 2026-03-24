@@ -1,121 +1,226 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import About    from '../components/about';
+import Projects from '../components/projects';
+import Skills   from '../components/skills';
+import Contact  from '../components/contact';
 import '../styles/design-system.css';
 import '../styles/home.css';
-import Projects from '../components/projects';
-import Experience from '../components/experience';
-import Skills from '../components/skills';
-import Contact from '../components/contact';
-import { ChevronDown, Download, ArrowRight, CheckCircle } from 'lucide-react';
-import { initAnimations } from '../utils/scroll-animations';
 
 function Home() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
   useEffect(() => {
-    initAnimations();
+    const handleMouse = (e) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth  - 0.5) * 10,
+        y: (e.clientY / window.innerHeight - 0.5) * 6,
+      });
+    };
+    window.addEventListener('mousemove', handleMouse);
+    return () => window.removeEventListener('mousemove', handleMouse);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const scrollToSection = (id) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
-  const handleResumeDownload = () => {
-    window.open('/resume.pdf', '_blank');
-  };
+  const stack = ['React', 'Node.js', 'FastAPI', 'PostgreSQL', 'RBAC', 'JWT'];
+
+  const fadeUp = (delay = 0) => ({
+    initial:    { opacity: 0, y: 28 },
+    animate:    { opacity: 1, y: 0 },
+    transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1], delay },
+  });
+
+  const fadeRight = (delay = 0) => ({
+    initial:    { opacity: 0, x: 36 },
+    animate:    { opacity: 1, x: 0 },
+    transition: { duration: 0.9,  ease: [0.22, 1, 0.36, 1], delay },
+  });
 
   return (
     <div className="home-container">
-      {/* Hero Section */}
+
+      {/* ══ HERO ══════════════════════════════════════════════ */}
       <header id="hero" className="hero-section">
-        <div className="hero-content">
+
+        {/* grain + blobs */}
+        <div className="hero-grain" aria-hidden="true" />
+        <div className="hero-blob hero-blob--a" aria-hidden="true" />
+        <div className="hero-blob hero-blob--b" aria-hidden="true" />
+
+        {/* vertical label */}
+        <motion.div className="hero-vert-label" {...fadeUp(0.1)}>
+          <span>Full-Stack Developer</span>
+          <span className="vert-line" />
+          <span>2025</span>
+        </motion.div>
+
+        <div className="hero-wrapper">
+
+          {/* ── LEFT ── */}
           <div className="hero-left">
-            <div className="hero-grid">
-              <div className="hero-copy">
-                <h1 className="hero-title">
-                  <span className="role">Backend-first Full-Stack Developer</span>
-                  <span className="value">Building secure, production-grade systems</span>
-                </h1>
-                <p className="hero-subtitle">
-                  Backend-first full-stack developer with hands-on experience building secure, production-grade systems for defence and enterprise environments.
-                </p>
-                <p className="hero-tech">Node.js · FastAPI · PostgreSQL · JWT/RBAC · React · Next.js</p>
-                <div className="hero-cta">
-                  <button onClick={() => scrollToSection('projects')} className="btn btn-primary">
-                    <span>View Projects</span>
-                    <ArrowRight className="btn-icon" />
-                  </button>
-                  <button onClick={handleResumeDownload} className="btn btn-secondary">
-                    <Download className="btn-icon" />
-                    <span>Download Resume</span>
-                    <small className="resume-note">PDF • 1 page</small>
-                  </button>
-                </div>
 
-                <div className="trust-signals">
-                  <div className="trust-signal">
-                    <CheckCircle size={16} />
-                    Defence-grade systems
-                  </div>
-                  <div className="trust-signal">
-                    <CheckCircle size={16} />
-                    Production deployments
-                  </div>
-                  <div className="trust-signal">
-                    <CheckCircle size={16} />
-                    Secure APIs & RBAC
-                  </div>
-                </div>
-              </div>
+            {/* eyebrow */}
+            <motion.div className="hero-eyebrow" {...fadeUp(0.15)}>
+              <span className="eyebrow-dot" />
+              <span>Available for opportunities</span>
+            </motion.div>
 
-              <div className="hero-media">
-                <div className="hero-image-wrapper">
-                  <img
-                    className="hero-image"
-                    src="/hero.jpeg"
-                    alt="Professional headshot"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
+            {/* name block */}
+            <motion.h1 className="hero-name" {...fadeUp(0.25)}>
+              <span className="name-hi">Hi, I'm</span>
+              <span className="name-main">Tushar</span>
+              <span className="name-role">
+                I build <em>scalable</em><br />systems.
+              </span>
+            </motion.h1>
+
+            {/* subtitle */}
+            <motion.p className="hero-subtitle" {...fadeUp(0.38)}>
+              Backend-first full-stack developer crafting secure,
+              production-grade applications — from REST APIs to
+              real-time dashboards.
+            </motion.p>
+
+            {/* tech stack */}
+            <motion.div className="hero-stack" {...fadeUp(0.48)}>
+              {stack.map((t, i) => (
+                <span
+                  key={t}
+                  className="stack-pill"
+                  style={{ animationDelay: `${0.5 + i * 0.06}s` }}
+                >
+                  {t}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div className="hero-cta" {...fadeUp(0.56)}>
+              <button
+                className="cta-primary"
+                onClick={() => scrollToSection('projects')}
+              >
+                <span className="cta-label">View Projects</span>
+                <span className="cta-arrow">↗</span>
+                <span className="cta-fill" />
+              </button>
+
+              <button
+                className="cta-ghost"
+                onClick={() => window.open('/resume.pdf', '_blank')}
+              >
+                Download Resume
+              </button>
+            </motion.div>
+
           </div>
+
+          {/* ── VERTICAL DIVIDER ── */}
+          <motion.div
+            className="hero-divider"
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            transition={{ duration: 1.1, ease: [0.22,1,0.36,1], delay: 0.4 }}
+            aria-hidden="true"
+          />
+
+          {/* ── RIGHT — image ── */}
+          <motion.div className="hero-right" {...fadeRight(0.3)}>
+
+            {/* section counter — top of right column */}
+            <div className="hero-counter" aria-hidden="true">
+              <span className="counter-num">01</span>
+              <span className="counter-line" />
+              <span className="counter-label">Hero</span>
+            </div>
+
+            {/* parallax frame */}
+            <motion.div
+              className="image-frame"
+              animate={{ x: mousePos.x, y: mousePos.y }}
+              transition={{ type: 'spring', stiffness: 55, damping: 20 }}
+            >
+              {/* editorial badge — top right */}
+              <motion.div
+                className="image-badge"
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0, duration: 0.5 }}
+              >
+                <span className="badge-num">3+</span>
+                <span className="badge-label">Yrs<br />Exp</span>
+              </motion.div>
+
+              <div className="image-inner">
+                <img src="/hero1.png" alt="Tushar Sohal" />
+                {/* editorial colour overlay — blends photo into palette */}
+                <div className="image-overlay" />
+                <div className="image-tint"   aria-hidden="true" />
+              </div>
+
+              {/* corner accents — all four corners */}
+              <div className="frame-corner frame-corner--tl" />
+              <div className="frame-corner frame-corner--tr" />
+              <div className="frame-corner frame-corner--bl" />
+              <div className="frame-corner frame-corner--br" />
+
+              {/* bottom caption strip */}
+              <div className="image-caption">
+                <span>Tushar Sohal</span>
+                <span className="caption-sep">·</span>
+                <span>New Delhi</span>
+              </div>
+            </motion.div>
+
+            {/* scroll hint */}
+            <motion.button
+              className="scroll-hint"
+              onClick={() => scrollToSection('about')}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.3 }}
+            >
+              <span className="scroll-text">Scroll</span>
+              <span className="scroll-line" />
+            </motion.button>
+
+          </motion.div>
+
         </div>
-        <button onClick={() => scrollToSection('projects')} className="scroll-indicator">
-          <ChevronDown className="scroll-icon" />
-          <span className="scroll-text">Explore my work</span>
-        </button>
+
+        {/* marquee ticker */}
+        <motion.div
+          className="hero-marquee"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <div className="marquee-track">
+            {[
+              'React', 'Node.js', 'FastAPI', 'PostgreSQL', 'MongoDB',
+              'JWT', 'RBAC', 'REST APIs', 'System Design', 'Angular',
+              'React', 'Node.js', 'FastAPI', 'PostgreSQL', 'MongoDB',
+              'JWT', 'RBAC', 'REST APIs', 'System Design', 'Angular',
+            ].map((t, i) => (
+              <span key={i} className="marquee-item">
+                {t} <span className="marquee-dot">·</span>
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
       </header>
 
-      <section id="about" className="about-section">
-        <div className="container">
-          <header className="section-header">
-            <h2 className="section-title">About Me</h2>
-          </header>
-          <div className="about-content">
-            <p>
-              I'm a backend-first full-stack developer focused on building secure, scalable systems for real-world use.
-              I enjoy working on API design, authentication, and database-driven applications, especially in environments where reliability and security matter.
-              Currently seeking backend or full-stack roles where I can contribute to production systems and continue growing as an engineer.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <main style={{ paddingTop: '96px' }}>
-        <div className="animate-on-scroll section-alt">
-          <Projects />
-        </div>
-        <div className="animate-on-scroll">
-          <Experience />
-        </div>
-        <div className="animate-on-scroll section-alt">
-          <Skills />
-        </div>
-        <div className="animate-on-scroll">
-          <Contact />
-        </div>
+      {/* ══ OTHER SECTIONS ════════════════════════════════════ */}
+      <About />
+      <main>
+        <Projects />
+        <Skills />
+        <Contact />
       </main>
+
     </div>
   );
 }
