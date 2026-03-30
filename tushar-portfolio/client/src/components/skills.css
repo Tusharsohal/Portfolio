@@ -17,7 +17,7 @@
   font-family: var(--font-sans, 'Syne', sans-serif);
   position: relative;
   overflow: hidden;
-  padding: 120px 60px 160px;
+  padding: 96px 60px 160px;
 }
 @media (max-width: 768px) { .sk-root { padding: 80px 24px 100px; } }
 @media (max-width: 480px) { .sk-root { padding: 60px 16px 80px; } }
@@ -30,6 +30,18 @@
   background-size: 200px;
 }
 .sk-root > *:not(.sk-grain) { position: relative; z-index: 1; }
+
+.sk-stats,
+.sk-section-label,
+.sk-heading-row,
+.sk-context,
+.sk-filters,
+.sk-grid,
+.sk-legend {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
 
 /* ── Ghost ── */
 .sk-ghost {
@@ -68,11 +80,7 @@
   gap: 1px;
   border: 1px solid rgba(86,84,73,0.25);
   margin-bottom: 80px;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1);
 }
-.sk-stats.sk-visible { opacity: 1; transform: none; }
 @media (max-width: 700px) { .sk-stats { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 400px) { .sk-stats { grid-template-columns: 1fr; } }
 
@@ -113,11 +121,7 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 60px;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
 }
-.sk-section-label.sk-visible { opacity: 1; transform: none; }
 
 .sk-label-num {
   font-family: var(--font-mono, 'DM Mono', monospace);
@@ -144,11 +148,7 @@
   gap: 60px;
   align-items: end;
   margin-bottom: 64px;
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.9s ease 0.15s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.15s;
 }
-.sk-heading-row.sk-visible { opacity: 1; transform: none; }
 @media (max-width: 900px) { .sk-heading-row { grid-template-columns: 1fr; gap: 24px; } }
 
 .sk-heading {
@@ -179,14 +179,6 @@
   letter-spacing: 0.08em;
   color: rgba(232,230,223,0.82);
   margin-bottom: 24px;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.8s ease 0.18s, transform 0.8s ease 0.18s;
-}
-
-.sk-context.sk-visible {
-  opacity: 1;
-  transform: none;
 }
 
 /* ══════════════════════════════════════
@@ -197,11 +189,7 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 48px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease 0.2s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s;
 }
-.sk-filters.sk-visible { opacity: 1; transform: none; }
 
 .sk-filter-btn {
   all: unset;
@@ -241,20 +229,16 @@
 ══════════════════════════════════════ */
 .sk-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
   margin-bottom: 56px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.9s ease 0.25s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s;
 }
-.sk-grid.sk-visible { opacity: 1; transform: none; }
 @media (max-width: 480px) { .sk-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ── Skill card ── */
 .sk-skill-card {
   position: relative;
-  padding: 18px 16px 16px;
+  padding: 20px 18px 18px;
   border: 1px solid rgba(255,255,255,0.08);
   background: #1c1f1a;
   display: flex;
@@ -330,7 +314,7 @@
 /* ── Skill name ── */
 .sk-skill-name {
   font-family: var(--font-sans, 'Syne', sans-serif);
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.35;
@@ -347,11 +331,7 @@
   gap: 18px;
   padding-top: 32px;
   border-top: 1px solid rgba(86,84,73,0.2);
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease 0.3s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s;
 }
-.sk-legend.sk-visible { opacity: 1; transform: none; }
 
 .sk-legend-title {
   font-family: var(--font-mono, 'DM Mono', monospace);
@@ -402,10 +382,6 @@
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .sk-stats, .sk-section-label, .sk-heading-row,
-  .sk-filters, .sk-grid, .sk-legend,
   .sk-skill-card { transition: none; animation: none; }
-  .sk-stats, .sk-section-label, .sk-heading-row,
-  .sk-filters, .sk-grid, .sk-legend { opacity: 1; transform: none; }
   .sk-skill-card { opacity: 1; }
 }

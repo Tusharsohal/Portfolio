@@ -31,7 +31,7 @@ function Projects() {
       title: 'Defence Intelligence & Operations Platform',
       summary:
         'Built a defence-grade operations platform for secure multi-unit workflows, approval routing, and sensitive operational data handling.',
-      label: 'Backend System • Secure Environment • Hierarchical Data',
+      label: 'Backend System • 800+ Users • Secure Environment',
       bullets: [
         'Designed a multi-tier RBAC system for secure unit-level access control and zero cross-unit data leakage.',
         'Built FastAPI-based REST APIs for workflow approvals, operational records, and map-linked intelligence modules.',
@@ -91,7 +91,7 @@ function Projects() {
       title: 'Library Management System',
       summary:
         'Delivered a desktop workflow system that replaced manual library administration with faster, more reliable operations.',
-      label: 'Desktop Workflow System • Admin Automation • Data Handling',
+      label: 'Desktop System • Automation • Rule-based Logic',
       bullets: [
         'Built an Electron-based library management system for book issuance, returns, overdue tracking, and reporting.',
         'Automated administrative workflows that reduced manual effort by about 85 percent.',
@@ -198,8 +198,8 @@ function Projects() {
               </div>
 
               <p className="pj-company">{featured.company}</p>
-              <p className="pj-classifier">{featured.label}</p>
               <h3 className="pj-title pj-title--featured">{featured.title}</h3>
+              <p className="pj-classifier">{featured.label}</p>
               <p className="pj-summary pj-summary--featured">{featured.summary}</p>
 
               <div className="pj-proof-list pj-proof-list--featured">
@@ -267,8 +267,8 @@ function Projects() {
             </div>
 
             <p className="pj-company">{project.company}</p>
-            <p className="pj-classifier">{project.label}</p>
             <h3 className="pj-title">{project.title}</h3>
+            <p className="pj-classifier">{project.label}</p>
             <p className="pj-summary">{project.summary}</p>
 
             <div className="pj-proof-list">

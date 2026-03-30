@@ -1,19 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import './skills.css';
 
 function Skills() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible] = useState(true);
   const [activeCategory, setActiveCategory] = useState('all');
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-      { threshold: 0.05 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const categories = [
     { id: 'all', label: 'All Skills', num: '00' },
@@ -94,7 +84,7 @@ function Skills() {
   const sorted = [...filtered].sort((a, b) => levelOrder[a.level] - levelOrder[b.level]);
 
   return (
-    <section id="skills" className="sk-root" ref={sectionRef}>
+    <section id="skills" className="sk-root">
       <div className="sk-grain" aria-hidden="true" />
       <div className="sk-ghost" aria-hidden="true">SKILLS</div>
       <div className="sk-separator" aria-hidden="true" />

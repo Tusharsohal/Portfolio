@@ -80,8 +80,8 @@ function Contact() {
           </h2>
           <div className="ct-hero-right">
             <p className="ct-sub">
-              Open to Backend Developer roles • Immediate joiner • Available
-              for remote, hybrid, or on-site opportunities.
+              Open to Backend Developer roles • Immediate joiner • Let&apos;s
+              build scalable systems.
             </p>
             <div className="ct-avail">
               <span className="ct-avail-dot" />
