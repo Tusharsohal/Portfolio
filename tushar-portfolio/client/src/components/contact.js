@@ -80,12 +80,12 @@ function Contact() {
           </h2>
           <div className="ct-hero-right">
             <p className="ct-sub">
-              Open to backend & full-stack roles and project collabs.
-              If you have something in mind — I'm listening.
+              Open to Backend Developer roles • Immediate joiner • Available
+              for remote, hybrid, or on-site opportunities.
             </p>
             <div className="ct-avail">
               <span className="ct-avail-dot" />
-              <span>Available for new opportunities</span>
+              <span>Open to backend roles • Immediate joiner • Remote / Hybrid</span>
             </div>
             <div className="ct-meta-row">
               <span className="ct-meta"><MapPin size={12} /> India · IST (UTC+5:30)</span>
@@ -179,8 +179,8 @@ function Contact() {
             <div className="ct-quote-block">
               <span className="ct-quote-bar" />
               <p className="ct-quote-text">
-                "I build secure, scalable systems — and I bring that same
-                rigour to every collaboration."
+                "I build secure, scalable backend systems that are ready for
+                production, not just demos."
               </p>
             </div>
           </div>
@@ -197,7 +197,7 @@ function Contact() {
           {/* Left — name + role */}
           <div className="ft-left">
             <span className="ft-name">Tushar Sohal</span>
-            <span className="ft-role">Full-Stack & Backend Developer</span>
+            <span className="ft-role">Backend Developer</span>
           </div>
 
           {/* Centre — nav links */}

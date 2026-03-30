@@ -113,6 +113,55 @@
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--olive);
 }
 
+.ab-why-hire {
+  margin-top: 40px;
+  padding: 28px 30px;
+  border: 1px solid rgba(86,84,73,0.16);
+  background: rgba(17,18,13,0.02);
+}
+
+.ab-why-hire-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 10px;
+}
+
+.ab-why-hire-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1;
+  margin-bottom: 18px;
+  color: var(--smoky);
+}
+
+.ab-why-hire-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.ab-why-hire-list li {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba(17,18,13,0.68);
+  padding-left: 18px;
+  position: relative;
+}
+
+.ab-why-hire-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--olive);
+}
+
 /* ══ BAND 2 — EXPERIENCE  (Smoky Black) ════════════════════ */
 .ab-band-exp {
   background: var(--smoky);
@@ -306,6 +355,24 @@
   font-family: var(--font-mono); font-size: 11px;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: rgba(216,207,188,0.45);
+}
+
+.ab-ep-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.ab-ep-highlight-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid rgba(216,207,188,0.18);
+  color: rgba(216,207,188,0.72);
+  background: rgba(255,255,255,0.02);
 }
 
 /* Impact callout — the number that matters, visually dominant */

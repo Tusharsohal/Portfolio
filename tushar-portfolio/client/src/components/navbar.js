@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './navbar.css';
 
+const sectionBgMap = {
+  hero: 'dark',
+  about: 'light',
+  projects: 'light',
+  skills: 'dark',
+  contact: 'olive',
+};
+
 function Navbar() {
   const [isMenuOpen,     setIsMenuOpen]     = useState(false);
   const [isScrolled,     setIsScrolled]     = useState(false);
@@ -9,15 +17,6 @@ function Navbar() {
   const [bgMode,         setBgMode]         = useState('dark'); // dark | light | olive
   const navRef  = useRef(null);
   const ticking = useRef(false);
-
-  // Section → background colour mapping (matches your section order)
-  const sectionBgMap = {
-    hero:       'dark',
-    about:      'light',
-    projects:   'light',
-    skills:     'dark',
-    contact:    'olive',
-  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -92,12 +91,12 @@ function Navbar() {
             {/* Name + role stack */}
             <div className="nb-logo-text">
               <span className="nb-logo-name">Tushar Sohal</span>
-              <span className="nb-logo-role">Full-Stack Developer</span>
+              <span className="nb-logo-role">Backend Developer</span>
             </div>
           </a>
 
           {/* ── DESKTOP NAV LINKS ── */}
-          <ul className="nb-links" role="list">
+          <ul className="nb-links">
             {navItems.map((item) => (
               <li key={item.id}>
                 <a

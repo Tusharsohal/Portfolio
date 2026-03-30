@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Target, ExternalLink, Github, Lock, ArrowUpRight } from 'lucide-react';
+import {
+  Target,
+  ExternalLink,
+  Github,
+  Lock,
+  ArrowUpRight,
+  CheckCircle2,
+} from 'lucide-react';
 import './projects.css';
 
 function Projects() {
@@ -22,18 +29,28 @@ function Projects() {
       index: '01',
       company: 'UPSALA DefSol — Indian Army',
       title: 'Defence Intelligence & Operations Platform',
-      outcome:
-        'Production platform deployed at the <strong>Indian Army PMO office</strong> — managing sensitive multi-unit operational data with zero cross-unit leakage under defence-compliant protocols.',
-      architecture:
-        'Multi-tier RBAC · Unit-level data isolation · Hierarchical approval chain · Real-time operational maps · PostgreSQL optimised',
-      highlight:
-        'Designed a hierarchical approval workflow where actions initiated at field level escalate upward through command tiers before execution — enforced at the API layer, not just the UI.',
-      environment: 'Indian Army · Controlled Deployment',
+      summary:
+        'Built a defence-grade operations platform for secure multi-unit workflows, approval routing, and sensitive operational data handling.',
+      label: 'Backend System • Secure Environment • Hierarchical Data',
+      bullets: [
+        'Designed a multi-tier RBAC system for secure unit-level access control and zero cross-unit data leakage.',
+        'Built FastAPI-based REST APIs for workflow approvals, operational records, and map-linked intelligence modules.',
+        'Optimized PostgreSQL schemas and query paths for large operational datasets used in real-time dashboards.',
+        'Enforced approval chains at the API layer so field-level actions moved through command hierarchy before execution.',
+      ],
+      proof: [
+        'RBAC implemented',
+        'Defence production deployment',
+        'Sensitive data isolation',
+        'Workflow approvals enforced',
+      ],
+      techLabel: 'Tech: FastAPI, PostgreSQL, Python, JWT, RBAC, Angular, Next.js',
       tech: ['FastAPI', 'PostgreSQL', 'Python', 'JWT', 'RBAC', 'Angular', 'Next.js'],
       security: true,
       restricted: true,
       type: 'Production',
       featured: true,
+      environment: 'Indian Army · Controlled Deployment',
       liveUrl: null,
       githubUrl: null,
     },
@@ -41,19 +58,29 @@ function Projects() {
       id: 2,
       index: '02',
       company: 'The Kapda Company — Personal Project',
-      title: 'Customisable Apparel E-Commerce Platform',
-      outcome:
-        'Fully live platform for buying and <strong>customising oversized tees & hoodies</strong> — 4-role RBAC end-to-end, Razorpay payments, email order flows, and product customisation engine.',
-      architecture:
-        'JWT · 4-role RBAC · Razorpay · Email notifications · Product customisation · Swagger API docs',
-      highlight:
-        '4 roles fully working end-to-end: Admin (platform control), Designer (content & onboarding), Brand/Seller (commerce & fulfilment), Customer (shop & customise).',
-      environment: 'Live · kapdaco.vercel.app',
-      tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'JWT', 'Razorpay', 'Tailwind CSS'],
+      title: 'Custom Apparel E-Commerce Platform',
+      summary:
+        'Shipped a live commerce platform for customizable apparel with secure payments, multi-role access, and order workflows.',
+      label: 'Multi-role System • RBAC • Payment Integration',
+      bullets: [
+        'Built a Node.js and Express backend powering product customization, checkout flows, and order lifecycle management.',
+        'Implemented 4-role RBAC for admin, designer, seller, and customer workflows across the full platform.',
+        'Integrated Razorpay and email notifications for production-ready payment confirmations and order communication.',
+        'Documented backend APIs with Swagger to improve testing, onboarding, and future feature delivery.',
+      ],
+      proof: [
+        '4-role RBAC',
+        'Payment gateway integrated',
+        'Live production project',
+        'Swagger-documented APIs',
+      ],
+      techLabel: 'Tech: Node.js, Express, PostgreSQL, JWT, Razorpay, React',
+      tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'JWT', 'Razorpay'],
       security: true,
       restricted: false,
       type: 'Personal · Live',
       featured: false,
+      environment: 'Live · kapdaco.vercel.app',
       liveUrl: 'https://kapdaco.vercel.app',
       githubUrl: 'https://github.com/Tusharsohal?tab=repositories',
     },
@@ -61,19 +88,29 @@ function Projects() {
       id: 3,
       index: '03',
       company: 'Lord Krishna Convent School',
-      title: 'Library Management System — Desktop',
-      outcome:
-        'Cut manual administrative effort by <strong>~85%</strong> — automating book issuance, returns, overdue fine calculation, and bulk Excel import/export via SheetJS.',
-      architecture:
-        'Electron.js shell · React.js · Node.js/Express.js · Normalised SQLite · SheetJS bulk import/export',
-      highlight:
-        'Designed end-to-end in Figma, then shipped as a working desktop app — full Figma-to-production pipeline delivered as a freelance project.',
-      environment: 'Institutional · LKCS Gurugram',
+      title: 'Library Management System',
+      summary:
+        'Delivered a desktop workflow system that replaced manual library administration with faster, more reliable operations.',
+      label: 'Desktop Workflow System • Admin Automation • Data Handling',
+      bullets: [
+        'Built an Electron-based library management system for book issuance, returns, overdue tracking, and reporting.',
+        'Automated administrative workflows that reduced manual effort by about 85 percent.',
+        'Integrated SheetJS-based bulk import and export for student records and book inventory operations.',
+        'Designed the full product flow in Figma and shipped it into production as a freelance desktop application.',
+      ],
+      proof: [
+        '85% admin effort reduced',
+        'Desktop production app',
+        'Bulk Excel workflows',
+        'End-to-end freelance delivery',
+      ],
+      techLabel: 'Tech: Electron.js, React, Node.js, SQLite, SheetJS, Figma',
       tech: ['Electron.js', 'React.js', 'Node.js', 'SQLite', 'SheetJS', 'Figma'],
       security: false,
       restricted: false,
       type: 'Freelance',
       featured: false,
+      environment: 'Institutional · LKCS Gurugram',
       liveUrl: null,
       githubUrl: 'https://github.com/Tusharsohal?tab=repositories',
     },
@@ -82,18 +119,28 @@ function Projects() {
       index: '04',
       company: 'Lord Krishna Convent School',
       title: 'School Website & Management Platform',
-      outcome:
-        'Production platform serving <strong>1,000+ daily users</strong> — with role-based access for staff, librarians, and admins; page load times reduced by ~35% post-optimisation.',
-      architecture:
-        'MERN stack · Cloudinary media · MongoDB Atlas · Vercel + Render · GoDaddy domain',
-      highlight:
-        'Optimised MongoDB queries and backend APIs reducing page load by ~35%. Live in production with zero downtime since launch.',
-      environment: 'Production · lordkrishnaconventschool.com',
+      summary:
+        'Built and maintained a production platform for school operations, role-based access, and public-facing content delivery.',
+      label: 'Production System • 1000+ Users • Admin Panel',
+      bullets: [
+        'Built MERN-based backend workflows for school operations, staff access, and content management.',
+        'Implemented role-based access for staff, librarians, and admins across operational dashboards.',
+        'Optimized MongoDB queries and backend API paths, reducing page load time by around 35 percent.',
+        'Supported a live system serving 1,000 plus daily users with stable production deployment.',
+      ],
+      proof: [
+        '1,000+ daily users',
+        '35% faster page loads',
+        'RBAC implemented',
+        'Production-ready system',
+      ],
+      techLabel: 'Tech: Node.js, Express, MongoDB, Cloudinary, React, Vercel',
       tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Cloudinary', 'Vercel'],
       security: false,
       restricted: false,
       type: 'Production',
       featured: false,
+      environment: 'Production · lordkrishnaconventschool.com',
       liveUrl: 'https://lordkrishnaconventschool.com',
       githubUrl: 'https://github.com/Tusharsohal?tab=repositories',
     },
@@ -104,35 +151,31 @@ function Projects() {
   };
 
   const featured = projects.find(p => p.featured);
-  const rest     = projects.filter(p => !p.featured);
+  const rest = projects.filter(p => !p.featured);
 
   return (
     <section id="projects" className="pj-root" ref={sectionRef}>
-
-      <div className="pj-grain"      aria-hidden="true" />
+      <div className="pj-grain" aria-hidden="true" />
       <div className="pj-ghost-word" aria-hidden="true">WORK</div>
-      <div className="pj-deco-line"  aria-hidden="true" />
+      <div className="pj-deco-line" aria-hidden="true" />
 
-      {/* Section label */}
       <div className={`pj-section-label ${isVisible ? 'pj-visible' : ''}`}>
         <span className="pj-label-num">03</span>
         <span className="pj-label-line" />
         <span className="pj-label-text">Selected Work</span>
       </div>
 
-      {/* Heading */}
       <div className={`pj-heading-row ${isVisible ? 'pj-visible' : ''}`}>
         <h2 className="pj-heading">
-          <span className="pj-heading-solid">Things I've</span>
-          <span className="pj-heading-italic"> shipped.</span>
+          <span className="pj-heading-solid">Proof of</span>
+          <span className="pj-heading-italic"> execution.</span>
         </h2>
         <p className="pj-sub">
-          Defence-grade systems, live e-commerce, and institutional tools —
-          every project in production, every metric real.
+          Backend systems, production rollouts, and measurable engineering impact
+          presented the way recruiters scan: what I built, what improved, and what shipped.
         </p>
       </div>
 
-      {/* ── FEATURED CARD — Defence platform ── */}
       {featured && (
         <article
           className={`pj-card pj-card--featured ${featured.restricted ? 'pj-card--restricted' : ''} ${isVisible ? 'pj-visible' : ''} ${hoveredId === featured.id ? 'pj-card--hovered' : ''}`}
@@ -140,8 +183,6 @@ function Projects() {
           onMouseLeave={() => setHoveredId(null)}
         >
           <div className="pj-featured-inner">
-
-            {/* Left */}
             <div className="pj-featured-left">
               <div className="pj-card-top">
                 <span className="pj-card-index">{featured.index}</span>
@@ -157,27 +198,34 @@ function Projects() {
               </div>
 
               <p className="pj-company">{featured.company}</p>
+              <p className="pj-classifier">{featured.label}</p>
               <h3 className="pj-title pj-title--featured">{featured.title}</h3>
+              <p className="pj-summary pj-summary--featured">{featured.summary}</p>
 
-              <div className="pj-featured-highlight">
-                <span className="pj-highlight-bar" />
-                <p>{featured.highlight}</p>
+              <div className="pj-proof-list pj-proof-list--featured">
+                {featured.proof.map((item) => (
+                  <span key={item} className="pj-proof-pill">{item}</span>
+                ))}
               </div>
 
               <div className="pj-tech-list">
-                {featured.tech.map((t, j) => (
-                  <span key={j} className="pj-tech-tag">{t}</span>
+                {featured.tech.map((t) => (
+                  <span key={t} className="pj-tech-tag">{t}</span>
                 ))}
               </div>
             </div>
 
-            {/* Right */}
             <div className="pj-featured-right">
-              <p
-                className="pj-outcome"
-                dangerouslySetInnerHTML={{ __html: featured.outcome }}
-              />
-              <p className="pj-arch">{featured.architecture}</p>
+              <ul className="pj-bullet-list">
+                {featured.bullets.map((bullet) => (
+                  <li key={bullet}>
+                    <CheckCircle2 size={14} />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="pj-arch">{featured.techLabel}</p>
               <div className="pj-actions pj-actions--featured">
                 <button
                   type="button"
@@ -189,15 +237,13 @@ function Projects() {
                 <span className="pj-env-tag">{featured.environment}</span>
               </div>
             </div>
-
           </div>
 
           <span className="pj-big-index" aria-hidden="true">{featured.index}</span>
-          <div  className="pj-corner"    aria-hidden="true" />
+          <div className="pj-corner" aria-hidden="true" />
         </article>
       )}
 
-      {/* ── 3-CARD GRID ── */}
       <div className={`pj-grid ${isVisible ? 'pj-visible' : ''}`}>
         {rest.map((project, i) => (
           <article
@@ -207,7 +253,7 @@ function Projects() {
             onMouseEnter={() => setHoveredId(project.id)}
             onMouseLeave={() => setHoveredId(null)}
           >
-            <div  className="pj-stripe"    aria-hidden="true" />
+            <div className="pj-stripe" aria-hidden="true" />
             <span className="pj-big-index" aria-hidden="true">{project.index}</span>
 
             <div className="pj-card-top">
@@ -221,18 +267,32 @@ function Projects() {
             </div>
 
             <p className="pj-company">{project.company}</p>
+            <p className="pj-classifier">{project.label}</p>
             <h3 className="pj-title">{project.title}</h3>
-            <p
-              className="pj-outcome"
-              dangerouslySetInnerHTML={{ __html: project.outcome }}
-            />
-            <p className="pj-arch">{project.architecture}</p>
+            <p className="pj-summary">{project.summary}</p>
+
+            <div className="pj-proof-list">
+              {project.proof.map((item) => (
+                <span key={item} className="pj-proof-pill">{item}</span>
+              ))}
+            </div>
+
+            <ul className="pj-bullet-list">
+              {project.bullets.map((bullet) => (
+                <li key={bullet}>
+                  <CheckCircle2 size={14} />
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="pj-arch">{project.techLabel}</p>
 
             <div className="pj-divider" />
 
             <div className="pj-tech-list">
-              {project.tech.map((t, j) => (
-                <span key={j} className="pj-tech-tag">{t}</span>
+              {project.tech.map((t) => (
+                <span key={t} className="pj-tech-tag">{t}</span>
               ))}
             </div>
 
@@ -265,7 +325,6 @@ function Projects() {
           </article>
         ))}
       </div>
-
     </section>
   );
 }

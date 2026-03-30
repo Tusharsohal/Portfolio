@@ -83,6 +83,7 @@ function About() {
       location: 'New Delhi',
       type:     'Full-time',
       impact:   'Indian Army · Prod',
+      highlights: ['RBAC Implementation', 'PostgreSQL Optimization', 'Hierarchical Data Handling', 'API Integration'],
       description: [
         'Architecting secure REST APIs for a defence-grade intelligence and operations platform deployed at the Indian Army PMO office — handling sensitive multi-unit operational data at production scale.',
         'Designed a multi-tier RBAC system enforcing strict unit-level data isolation — no unit can access another\'s data — combined with a hierarchical approval workflow where actions escalate upward through command tiers before execution.',
@@ -104,6 +105,7 @@ function About() {
       location: 'Gurugram',
       type:     'Internship',
       impact:   '1,000+ daily users',
+      highlights: ['Workflow Automation', 'System Delivery', 'Role-Based Access', 'Analytics Dashboard'],
       description: [
         'Designed full system UI in Figma, then built a desktop Library Management System using Electron.js + React.js — automating book issuance, returns, overdue fine calculation, and reporting, cutting manual effort by ~85%.',
         'Integrated Excel import/export via SheetJS for bulk student and book inventory data management, eliminating manual entry workflows entirely.',
@@ -125,6 +127,7 @@ function About() {
       location: 'New Delhi',
       type:     'Internship',
       impact:   'Springer Nature · Live',
+      highlights: ['Payment Integration', 'Session Security', 'MySQL Design', 'Transaction Flow'],
       description: [
         'Developed a subscription management system for BIJIT Journal — an academic publication by Springer Nature — handling user registration, plan selection, and end-to-end payment flows.',
         'Integrated Razorpay payment gateway with server-side session management in ASP.NET MVC, preventing client-side tampering of transaction state across the full subscription lifecycle.',
@@ -196,16 +199,9 @@ function About() {
 
           <div className="ab-intro-right">
             <p className="ab-intro-body">
-              Full Stack Developer currently building secure, production-grade backend systems
-              for the <strong>Indian Army</strong> at UPSALA DefSol. I specialise in REST API
-              design, JWT/RBAC security architecture, and PostgreSQL optimisation — with
-              enough frontend range to own a product from Figma to deployment.
-            </p>
-            <p className="ab-intro-body">
-              Previously delivered production systems at LKCS serving
-              <strong> 1,000+ daily users</strong> and a live payment integration for a
-              <strong> Springer Nature</strong> academic journal. I build systems that are
-              secure by design, not by accident.
+              I build backend systems focused on scalability, performance, and
+              security — from API design and database optimization to handling
+              complex data flows in production environments.
             </p>
 
             <div className="ab-stats-row">
@@ -220,6 +216,19 @@ function About() {
                   <span className="ab-stat-label">{s.label}</span>
                 </div>
               ))}
+            </div>
+
+            <div className="ab-why-hire">
+              <div className="ab-why-hire-head">
+                <span className="ab-why-hire-kicker">Why hire me?</span>
+                <h3 className="ab-why-hire-title">Backend strength, built for production.</h3>
+              </div>
+              <ul className="ab-why-hire-list">
+                <li>Strong backend fundamentals across Node.js and Python.</li>
+                <li>Experience building production-ready APIs and secure role-based systems.</li>
+                <li>Focus on performance, scalability, and maintainable architecture.</li>
+                <li>Comfortable owning delivery from system design to deployment.</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -277,6 +286,12 @@ function About() {
                       </div>
                       <h3 className="ab-ep-role">{exp.role}</h3>
                       <p  className="ab-ep-company">{exp.company}</p>
+
+                      <div className="ab-ep-highlights">
+                        {exp.highlights.map((item) => (
+                          <span key={item} className="ab-ep-highlight-tag">{item}</span>
+                        ))}
+                      </div>
                     </div>
                     <div className="ab-ep-impact">
                       <span className="ab-ep-impact-value">{exp.impact}</span>
