@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Github, Linkedin, FileText } from 'lucide-react';
 import './navbar.css';
 
 const sectionBgMap = {
   hero: 'dark',
-  about: 'light',
-  projects: 'light',
+  about: 'dark',
+  projects: 'dark',
   skills: 'dark',
   contact: 'olive',
 };
@@ -91,7 +92,10 @@ function Navbar() {
             {/* Name + role stack */}
             <div className="nb-logo-text">
               <span className="nb-logo-name">Tushar Sohal</span>
-              <span className="nb-logo-role">Backend Developer</span>
+              <span className="nb-logo-role">
+                <span className="nb-status-dot" aria-hidden="true" />
+                Backend Engineer · Open to Work
+              </span>
             </div>
           </a>
 
@@ -111,6 +115,37 @@ function Navbar() {
               </li>
             ))}
           </ul>
+
+          {/* ── SOCIAL + RESUME ── */}
+          <div className="nb-social">
+            <a
+              href="https://github.com/Tusharsohal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nb-social-link"
+              aria-label="GitHub profile"
+            >
+              <Github size={16} />
+            </a>
+            <a
+              href="https://linkedin.com/in/tushar-sohal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nb-social-link"
+              aria-label="LinkedIn profile"
+            >
+              <Linkedin size={16} />
+            </a>
+            <a
+              href="/Tushar_Sohal_resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nb-social-link nb-social-link--resume"
+              aria-label="Download resume as PDF"
+            >
+              <FileText size={16} />
+            </a>
+          </div>
 
           {/* ── CTA ── */}
           <a

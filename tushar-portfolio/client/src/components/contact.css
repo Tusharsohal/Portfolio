@@ -39,7 +39,7 @@
   font-weight: 900;
   font-style: italic;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(216,207,188,0.07);
+  -webkit-text-stroke: 1px rgba(201, 149, 108, 0.18);
   pointer-events: none;
   user-select: none;
   line-height: 1;
@@ -72,18 +72,19 @@
 
 .ct-label-num {
   font-family: var(--font-mono, 'DM Mono', monospace);
-  font-size: 11px; letter-spacing: 0.16em;
-  color: rgba(216,207,188,0.4);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.16em;
+  color: var(--copper, #C9956C);
 }
 .ct-label-line {
-  flex: 0 0 40px; height: 1px;
-  background: rgba(216,207,188,0.2);
+  flex: 0 0 48px; height: 1px;
+  background: linear-gradient(90deg, var(--copper, #C9956C), rgba(216, 207, 188, 0.18));
 }
 .ct-label-text {
   font-family: var(--font-mono, 'DM Mono', monospace);
-  font-size: 11px; letter-spacing: 0.18em;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.20em;
   text-transform: uppercase;
-  color: rgba(216,207,188,0.6);
+  color: var(--floral, #FFFBF4);
 }
 
 /* ══════════════════════════════════════

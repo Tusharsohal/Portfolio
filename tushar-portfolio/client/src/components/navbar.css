@@ -34,8 +34,8 @@
 }
 .nb-progress-fill {
   height: 100%;
-  background: var(--bone);
-  opacity: 0.5;
+  background: linear-gradient(90deg, transparent, var(--copper) 60%, var(--copper));
+  opacity: 0.7;
   transition: width 0.1s linear;
 }
 
@@ -62,12 +62,38 @@
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
 }
+/* Light mode is no longer used (all sections are dark). Keep selector
+   and override to dark colors so any stale state still renders correctly. */
 .nb-root--scrolled.nb-root--light {
-  background: rgba(255, 251, 244, 0.9);
-  box-shadow: 0 1px 0 rgba(86,84,73,0.15), 0 8px 24px rgba(0,0,0,0.08);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  background: rgba(17, 18, 13, 0.88);
+  box-shadow: 0 1px 0 rgba(86,84,73,0.3), 0 8px 32px rgba(0,0,0,0.35);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
 }
+/* Force light-mode child elements back to the dark palette */
+.nb-root--light .nb-monogram { border-color: rgba(216,207,188,0.25); }
+.nb-root--light .nb-mono-t,
+.nb-root--light .nb-mono-s    { color: var(--floral); }
+.nb-root--light .nb-mono-dot  { background: var(--bone); }
+.nb-root--light .nb-logo-name { color: var(--floral); }
+.nb-root--light .nb-logo-role { color: rgba(216,207,188,0.55); }
+.nb-root--light .nb-link      { color: rgba(216,207,188,0.45); }
+.nb-root--light .nb-link:hover,
+.nb-root--light .nb-link--active { color: var(--floral) !important; }
+.nb-root--light .nb-link-bar  { background: var(--bone); }
+.nb-root--light .nb-social-link { color: rgba(216,207,188,0.55); }
+.nb-root--light .nb-social-link:hover {
+  color: var(--floral);
+  background: rgba(216,207,188,0.10);
+}
+.nb-root--light .nb-cta-inner { border-color: rgba(216,207,188,0.45); }
+.nb-root--light .nb-cta-fill  { background: var(--bone); }
+.nb-root--light .nb-cta-pulse { background: var(--bone); }
+.nb-root--light .nb-cta:hover .nb-cta-pulse { background: var(--smoky); }
+.nb-root--light .nb-cta-text  { color: var(--floral); }
+.nb-root--light .nb-cta:hover .nb-cta-text { color: var(--smoky); }
+.nb-root--light .nb-toggle:hover { border-color: rgba(216,207,188,0.25); }
+.nb-root--light .nb-bar { background: var(--floral); }
 .nb-root--scrolled.nb-root--olive {
   background: rgba(44, 43, 36, 0.9);
   box-shadow: 0 1px 0 rgba(216,207,188,0.12), 0 8px 24px rgba(0,0,0,0.3);
@@ -98,15 +124,15 @@
 .nb-root--light .nb-hairline { background: rgba(86,84,73,0.0); }
 .nb-root--olive .nb-hairline { background: rgba(86,84,73,0.0); }
 .nb-root--scrolled .nb-hairline {
-  background: rgba(86,84,73,0.2);
+  background: rgba(216, 207, 188, 0.08);
   transition: background 0.5s;
 }
 .nb-hairline-fill {
   position: absolute;
   top: 0; left: 0;
   height: 100%;
-  background: var(--bone);
-  opacity: 0.6;
+  background: linear-gradient(90deg, transparent, var(--copper) 70%, var(--copper));
+  opacity: 0.55;
   transition: width 0.12s linear;
 }
 
@@ -128,8 +154,9 @@
   align-items: center;
   gap: 3px;
   padding: 6px 10px;
-  border: 1px solid rgba(216,207,188,0.25);
-  background: transparent;
+  border: 1px solid rgba(216,207,188,0.4);
+  border-radius: 6px;
+  background: rgba(216,207,188,0.04);
   transition: border-color 0.3s, background 0.3s;
 }
 .nb-root--light .nb-monogram {
@@ -184,15 +211,45 @@
 .nb-root--light .nb-logo-name { color: var(--smoky); }
 
 .nb-logo-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: 'DM Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(216,207,188,0.45);
+  color: rgba(216,207,188,0.55);
   line-height: 1;
   transition: color 0.4s;
 }
 .nb-root--light .nb-logo-role { color: var(--olive); }
+
+/* Pulsing availability dot */
+.nb-status-dot {
+  position: relative;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+}
+.nb-status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.35);
+  animation: nb-status-pulse 2s ease-out infinite;
+}
+@keyframes nb-status-pulse {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nb-status-dot::after { animation: none; }
+}
 
 /* ═══════════════════════════════════════════════════════════
    DESKTOP NAV LINKS
@@ -211,16 +268,15 @@
   gap: 7px;
   padding: 8px 18px;
   text-decoration: none;
-  color: rgba(216,207,188,0.45);
+  color: rgba(216,207,188,0.7);
   transition: color 0.25s;
   overflow: hidden;
 }
 
-/* Dark sections */
-.nb-root--dark  .nb-link { color: rgba(216,207,188,0.45); }
-.nb-root--olive .nb-link { color: rgba(216,207,188,0.5); }
-/* Light sections — invert */
-.nb-root--light .nb-link { color: rgba(17,18,13,0.4); }
+/* All sections are dark — keep nav links bright enough to read */
+.nb-root--dark  .nb-link { color: rgba(216,207,188,0.7); }
+.nb-root--olive .nb-link { color: rgba(216,207,188,0.7); }
+.nb-root--light .nb-link { color: rgba(216,207,188,0.7); }
 
 .nb-link:hover,
 .nb-link--active {
@@ -228,14 +284,15 @@
 }
 .nb-root--light .nb-link:hover,
 .nb-root--light .nb-link--active {
-  color: var(--smoky) !important;
+  color: var(--floral) !important;
 }
 
 .nb-link-num {
   font-family: 'DM Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.12em;
-  opacity: 0.5;
+  opacity: 0.65;
+  color: var(--copper, #C9956C);
   transition: opacity 0.25s;
 }
 .nb-link:hover .nb-link-num,
@@ -264,6 +321,47 @@
 .nb-root--light .nb-link-bar { background: var(--smoky); }
 .nb-link:hover .nb-link-bar,
 .nb-link--active .nb-link-bar { transform: scaleX(1); }
+
+/* ═══════════════════════════════════════════════════════════
+   SOCIAL ICONS  (GitHub · LinkedIn · Resume)
+═══════════════════════════════════════════════════════════ */
+.nb-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 14px;
+  flex-shrink: 0;
+}
+
+.nb-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: rgba(216, 207, 188, 0.6);
+  transition: color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.nb-root--dark  .nb-social-link { color: rgba(216, 207, 188, 0.55); }
+.nb-root--olive .nb-social-link { color: rgba(216, 207, 188, 0.6); }
+.nb-root--light .nb-social-link { color: rgba(17, 18, 13, 0.55); }
+
+.nb-social-link:hover {
+  color: var(--floral);
+  background: rgba(216, 207, 188, 0.1);
+  transform: translateY(-1px);
+}
+.nb-root--light .nb-social-link:hover {
+  color: var(--smoky);
+  background: rgba(17, 18, 13, 0.06);
+}
+
+@media (max-width: 768px) {
+  .nb-social { display: none; }
+}
 
 /* ═══════════════════════════════════════════════════════════
    CTA BUTTON

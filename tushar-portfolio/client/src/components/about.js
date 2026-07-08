@@ -78,7 +78,7 @@ function About() {
   const experiences = [
     {
       company:  'UPSALA DefSol & IT Services Pvt. Ltd.',
-      role:     'Web Developer',
+      role:     'Backend Developer',
       duration: 'Sep 2025 – Present',
       location: 'New Delhi',
       type:     'Full-time',

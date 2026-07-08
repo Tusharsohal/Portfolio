@@ -54,7 +54,7 @@
   font-weight: 900;
   font-style: italic;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(86,84,73,0.08);
+  -webkit-text-stroke: 1px rgba(201, 149, 108, 0.16);
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
@@ -106,10 +106,10 @@
 }
 .sk-stat-label {
   font-family: var(--font-mono, 'DM Mono', monospace);
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--olive, #565449);
+  color: rgba(216, 207, 188, 0.85);
   line-height: 1.4;
 }
 
@@ -125,18 +125,19 @@
 
 .sk-label-num {
   font-family: var(--font-mono, 'DM Mono', monospace);
-  font-size: 11px; letter-spacing: 0.16em;
-  color: var(--olive, #565449);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.16em;
+  color: var(--copper, #C9956C);
 }
 .sk-label-line {
-  flex: 0 0 40px; height: 1px;
-  background: rgba(86,84,73,0.35);
+  flex: 0 0 48px; height: 1px;
+  background: linear-gradient(90deg, var(--copper, #C9956C), rgba(216, 207, 188, 0.15));
 }
 .sk-label-text {
   font-family: var(--font-mono, 'DM Mono', monospace);
-  font-size: 11px; letter-spacing: 0.18em;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.20em;
   text-transform: uppercase;
-  color: var(--bone, #D8CFBC);
+  color: var(--floral, #FFFBF4);
 }
 
 /* ══════════════════════════════════════

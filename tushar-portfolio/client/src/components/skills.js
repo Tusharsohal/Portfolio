@@ -70,10 +70,10 @@ function Skills() {
   ];
 
   const stats = [
-    { value: '1+', label: 'Year Professional Exp.' },
+    { value: '1+', label: 'Years Experience' },
     { value: '4', label: 'Production Projects' },
-    { value: '42+', label: 'Skills Across Stack' },
-    { value: 'MERN', label: '+ FastAPI + Angular' },
+    { value: '42+', label: 'Skills & Tools' },
+    { value: 'MERN', label: 'Primary Stack' },
   ];
 
   const filtered = activeCategory === 'all'

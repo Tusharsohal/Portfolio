@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail, Layers, Shield, Zap, Lock, Gauge, Network, Server, Terminal } from 'lucide-react';
 import About from '../components/about';
 import Projects from '../components/projects';
 import Skills from '../components/skills';
@@ -7,49 +8,49 @@ import Contact from '../components/contact';
 import '../styles/design-system.css';
 import '../styles/home.css';
 
-const typingLines = [
-  'Building scalable APIs...',
-  'Optimizing database queries...',
-  'Deploying production systems...',
-];
-
-const terminalMetrics = [
-  { label: 'Latency', value: '120ms avg' },
-  { label: 'Auth', value: 'JWT + RBAC' },
-  { label: 'Caching', value: 'Redis Active' },
-];
-
 const trustSignals = [
   {
+    Icon: Lock,
     title: 'RBAC-based access control implemented',
     body: 'Secure permissions for protected workflows and multi-role products.',
   },
   {
+    Icon: Gauge,
     title: 'Optimized APIs for large-scale datasets',
     body: 'Performance-focused backend paths for heavy queries and real workloads.',
   },
   {
+    Icon: Network,
     title: 'Handled hierarchical data in multi-level systems',
     body: 'Authorization, approvals, and structured data flow across layered systems.',
   },
   {
+    Icon: Server,
     title: 'Built production-ready backend systems',
     body: 'Node.js and Python systems designed for security, scale, and maintainability.',
   },
 ];
 
-const systemPrinciples = [
-  'Design APIs with scalability and performance in mind',
-  'Optimize database queries for large datasets',
-  'Implement secure authentication and RBAC',
-  'Ensure clean architecture and maintainable code',
+const buildPrinciples = [
+  {
+    Icon: Layers,
+    title: 'Layered Architecture',
+    body: 'REST APIs with clear separation across routes, controllers, services, and data layers — each layer independently testable.',
+  },
+  {
+    Icon: Shield,
+    title: 'Security First',
+    body: 'JWT auth, input validation, rate limiting, and role-based access control built in from day one — not bolted on later.',
+  },
+  {
+    Icon: Zap,
+    title: 'Built to Scale',
+    body: 'Indexed databases, efficient query patterns, and stateless API design so the system handles load without surprises.',
+  },
 ];
 
 function Home() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [typedText, setTypedText] = useState('');
-  const [activeLine, setActiveLine] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const handleMouse = (e) => {
@@ -62,37 +63,6 @@ function Home() {
     window.addEventListener('mousemove', handleMouse);
     return () => window.removeEventListener('mousemove', handleMouse);
   }, []);
-
-  useEffect(() => {
-    const currentLine = typingLines[activeLine];
-    const isComplete = typedText === currentLine;
-    const isEmpty = typedText.length === 0;
-
-    const timeout = window.setTimeout(
-      () => {
-        if (!isDeleting && !isComplete) {
-          setTypedText(currentLine.slice(0, typedText.length + 1));
-          return;
-        }
-
-        if (!isDeleting && isComplete) {
-          setIsDeleting(true);
-          return;
-        }
-
-        if (isDeleting && !isEmpty) {
-          setTypedText(currentLine.slice(0, typedText.length - 1));
-          return;
-        }
-
-        setIsDeleting(false);
-        setActiveLine((prev) => (prev + 1) % typingLines.length);
-      },
-      !isDeleting && isComplete ? 1300 : isDeleting ? 35 : 70
-    );
-
-    return () => window.clearTimeout(timeout);
-  }, [activeLine, isDeleting, typedText]);
 
   const scrollToSection = (id) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -154,8 +124,16 @@ function Home() {
               <span>Available for backend-focused roles</span>
             </motion.div>
 
+            <motion.div className="hero-terminal-line" variants={staggerItem}>
+              <span className="hero-term-prompt">~/portfolio</span>
+              <span className="hero-term-arrow">$</span>
+              <span className="hero-term-cmd">whoami</span>
+              <span className="hero-term-caret" aria-hidden="true" />
+            </motion.div>
+
             <motion.p className="hero-kicker" variants={staggerItem}>
-              Backend Engineer • Node.js • Python
+              <Terminal size={12} strokeWidth={2} className="hero-kicker-icon" aria-hidden="true" />
+              <span>Backend Engineer · Node.js · Python</span>
             </motion.p>
 
             <motion.h1 className="hero-title" variants={staggerItem}>
@@ -204,6 +182,31 @@ function Home() {
               </motion.button>
             </motion.div>
 
+            <motion.div className="hero-social-row" variants={staggerItem}>
+              <a
+                href="https://github.com/Tusharsohal"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub profile"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href="https://linkedin.com/in/tushar-sohal"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn profile"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="mailto:tusharsohal20@gmail.com"
+                aria-label="Send email"
+              >
+                <Mail size={18} />
+              </a>
+            </motion.div>
+
             <motion.p className="hero-credibility" variants={staggerItem}>
               1+ year experience • Built production-ready systems •
               Performance-focused
@@ -211,92 +214,55 @@ function Home() {
           </motion.div>
 
           <motion.div className="hero-right" {...fadeRight(0.32)}>
-            <motion.div
-              className="terminal-shell"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-            >
-              <motion.div
-                className="terminal-shell-inner"
-              animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <div className="terminal-header">
-                  <div className="terminal-dots" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
+            <span className="hero-code-deco hero-code-deco--top" aria-hidden="true">
+              {'// engineer.profile'}
+            </span>
+
+            <div className="hero-photo-wrap">
+              <div className="hero-ide-shell">
+                <div className="hero-ide-chrome" aria-hidden="true">
+                  <div className="hero-ide-dots">
+                    <span className="hero-ide-dot hero-ide-dot--r" />
+                    <span className="hero-ide-dot hero-ide-dot--y" />
+                    <span className="hero-ide-dot hero-ide-dot--g" />
                   </div>
-                  <span className="terminal-title">backend-session.tsx</span>
+                  <span className="hero-ide-file">tushar.dev — engineer.tsx</span>
+                  <span className="hero-ide-branch">
+                    <span className="hero-ide-branch-icon">⎇</span> main
+                  </span>
                 </div>
 
-                <div className="terminal-body">
-                  <div className="terminal-line terminal-line--muted">
-                    <span className="prompt-symbol">$</span>
-                    <span>node deploy-service.js --env production</span>
-                  </div>
+                <div className="hero-photo-frame">
+                  <img
+                    src="/hero_img.jpeg"
+                    alt="Tushar Sohal — Backend Engineer"
+                    className="hero-photo"
+                    loading="eager"
+                  />
+                </div>
+              </div>
 
-                  <div className="terminal-line">
-                    <span className="prompt-symbol">&gt;</span>
-                    <span>{typedText}</span>
-                    <span className="typing-caret" aria-hidden="true" />
-                  </div>
-
-                  <div className="terminal-snippet">
-                    <span className="code-keyword">const</span> optimize ={' '}
-                    <span className="code-keyword">async</span> () =&gt; {'{'}
-                    <br />
-                    <span className="code-indent">
-                      <span className="code-keyword">return</span> await
-                      redisCache(apiResponse);
-                    </span>
-                    <br />
-                    {'};'}
-                  </div>
-
-                  <div className="terminal-status">
-                    <div className="status-row">
-                      <span>GET /api/v1/users</span>
-                      <strong className="status-value status-value--live">120ms</strong>
-                    </div>
-                    <div className="status-row">
-                      <span>Cache Layer</span>
-                      <strong>Redis OK</strong>
-                    </div>
-                    <div className="status-row">
-                      <span>Database</span>
-                      <strong>PostgreSQL Live</strong>
-                    </div>
-                  </div>
-
-                  <div className="terminal-metrics">
-                    {terminalMetrics.map((metric) => (
-                      <div key={metric.label} className="metric-card">
-                        <span className="metric-label">{metric.label}</span>
-                        <strong>{metric.value}</strong>
-                      </div>
-                    ))}
-                  </div>
+              <motion.div
+                className="hero-status-card"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
+              >
+                <div className="hero-status-row">
+                  <span className="hero-status-pulse" aria-hidden="true" />
+                  <span className="hero-status-label">Currently shipping</span>
+                </div>
+                <strong className="hero-status-value">Defence Intelligence Platform</strong>
+                <div className="hero-status-metrics">
+                  <span><em>120ms</em> p95 API</span>
+                  <span><em>99.9%</em> uptime</span>
                 </div>
               </motion.div>
-            </motion.div>
 
-            <motion.div
-              className="floating-card"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0, y: [0, 12, 0], rotate: [0, -1.2, 0] }}
-              transition={{
-                opacity: { delay: 0.6, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                x: { delay: 0.6, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                y: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
-                rotate: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
-              }}
-            >
-              <span className="floating-label">Service Health</span>
-              <strong>99.9% uptime mindset</strong>
-              <p>API to cache to database, with secure auth and performance-first decisions.</p>
-            </motion.div>
+              <span className="hero-code-deco hero-code-deco--bottom" aria-hidden="true">
+                {'<engineer />'}
+              </span>
+            </div>
           </motion.div>
         </div>
       </header>
@@ -313,10 +279,13 @@ function Home() {
           </div>
 
           <div className="trust-grid">
-            {trustSignals.map((signal) => (
-              <article key={signal.title} className="trust-card">
-                <h3>{signal.title}</h3>
-                <p>{signal.body}</p>
+            {trustSignals.map(({ Icon, title, body }) => (
+              <article key={title} className="trust-card">
+                <span className="trust-card-icon" aria-hidden="true">
+                  <Icon size={18} strokeWidth={1.6} />
+                </span>
+                <h3>{title}</h3>
+                <p>{body}</p>
               </article>
             ))}
           </div>
@@ -329,11 +298,14 @@ function Home() {
             <span className="systems-kicker">System Thinking</span>
             <h2>How I Build Systems</h2>
           </div>
-          <div className="systems-grid">
-            {systemPrinciples.map((item, index) => (
-              <div key={item} className="systems-item">
-                <span className="systems-item-mark">{String(index + 1).padStart(2, '0')}</span>
-                <p>{item}</p>
+          <div className="systems-grid systems-grid--icons">
+            {buildPrinciples.map(({ Icon, title, body }) => (
+              <div key={title} className="systems-item systems-item--icon">
+                <span className="systems-item-icon" aria-hidden="true">
+                  <Icon size={22} strokeWidth={1.5} />
+                </span>
+                <h3 className="systems-item-title">{title}</h3>
+                <p>{body}</p>
               </div>
             ))}
           </div>
