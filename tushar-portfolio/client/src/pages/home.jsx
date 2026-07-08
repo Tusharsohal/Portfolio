@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Layers, Shield, Zap, Lock, Gauge, Network, Server, Terminal } from 'lucide-react';
+import { Github, Linkedin, Mail, Layers, Shield, Zap, Lock, Gauge, Server, Terminal, Database, Map, GitBranch, KeyRound } from 'lucide-react';
 import About from '../components/about';
 import Projects from '../components/projects';
 import Skills from '../components/skills';
@@ -11,41 +11,86 @@ import '../styles/home.css';
 const trustSignals = [
   {
     Icon: Lock,
-    title: 'RBAC-based access control implemented',
-    body: 'Secure permissions for protected workflows and multi-role products.',
+    title: 'JWT + RBAC + IAM auth in production',
+    body: 'Refresh-token rotation and role-scoped access enforcing unit-level data isolation for 800+ users.',
+  },
+  {
+    Icon: Map,
+    title: 'GIS backend with PostGIS & GeoAlchemy2',
+    body: 'Spatial services powering operational maps, reports, and dashboards from PostgreSQL.',
   },
   {
     Icon: Gauge,
-    title: 'Optimized APIs for large-scale datasets',
-    body: 'Performance-focused backend paths for heavy queries and real workloads.',
-  },
-  {
-    Icon: Network,
-    title: 'Handled hierarchical data in multi-level systems',
-    body: 'Authorization, approvals, and structured data flow across layered systems.',
+    title: 'PostgreSQL tuned for scale',
+    body: 'Joins, indexing, and recursive hierarchical queries that cut latency on large operational datasets.',
   },
   {
     Icon: Server,
-    title: 'Built production-ready backend systems',
-    body: 'Node.js and Python systems designed for security, scale, and maintainability.',
+    title: 'Shipped to defence-grade production',
+    body: 'Redis caching, zero-downtime data migration, and schema versioning under strict deployment protocols.',
   },
 ];
 
 const buildPrinciples = [
   {
     Icon: Layers,
-    title: 'Layered Architecture',
-    body: 'REST APIs with clear separation across routes, controllers, services, and data layers — each layer independently testable.',
+    title: 'Layered REST Architecture',
+    body: 'FastAPI and Node.js services with clean separation across routes, services, and data layers — each independently testable and versioned.',
   },
   {
     Icon: Shield,
-    title: 'Security First',
-    body: 'JWT auth, input validation, rate limiting, and role-based access control built in from day one — not bolted on later.',
+    title: 'Security by Default',
+    body: 'JWT with refresh rotation, RBAC, and IAM built in from the first commit — data isolation and least-privilege access, not bolted on later.',
   },
   {
     Icon: Zap,
-    title: 'Built to Scale',
-    body: 'Indexed databases, efficient query patterns, and stateless API design so the system handles load without surprises.',
+    title: 'Engineered for Load',
+    body: 'Indexed schemas, recursive CTEs, and a Redis cache layer so heavy queries and real workloads stay fast under pressure.',
+  },
+];
+
+const engineeringChallenges = [
+  {
+    Icon: Database,
+    tag: 'Query Optimization',
+    title: 'Slow dashboards on large operational datasets',
+    body: 'Rewrote hot read paths with targeted joins and indexing on high-cardinality columns, improving PostgreSQL response time and backend scalability under real load.',
+    stack: ['PostgreSQL', 'Indexing', 'Joins'],
+  },
+  {
+    Icon: GitBranch,
+    tag: 'Recursive Queries',
+    title: 'Deeply nested military command hierarchies',
+    body: 'Modeled the org tree with recursive hierarchical queries so an entire command chain resolves in a single query instead of many application-level round trips.',
+    stack: ['Recursive CTE', 'PostgreSQL', 'SQLAlchemy'],
+  },
+  {
+    Icon: Gauge,
+    tag: 'Caching',
+    title: 'Repeated reads hammering the database',
+    body: 'Introduced a Redis caching layer over stable reference and lookup data, reducing redundant DB hits and smoothing response times on dashboard endpoints.',
+    stack: ['Redis', 'Cache Invalidation'],
+  },
+  {
+    Icon: Map,
+    tag: 'GIS Backend',
+    title: 'Serving spatial data for operational maps',
+    body: 'Built GIS-enabled services with PostGIS and GeoAlchemy2 to store and query geospatial geometries feeding maps, reports, and operational overlays.',
+    stack: ['PostGIS', 'GeoAlchemy2', 'SQLAlchemy'],
+  },
+  {
+    Icon: KeyRound,
+    tag: 'Authentication',
+    title: 'Secure, role-scoped access across a hierarchy',
+    body: 'Implemented JWT with refresh-token rotation, RBAC, and IAM integration so every request is authenticated, scoped to a role, and isolated to its own unit.',
+    stack: ['JWT', 'RBAC', 'IAM'],
+  },
+  {
+    Icon: Server,
+    tag: 'Production Migration',
+    title: 'Evolving schema on a live defence platform',
+    body: 'Executed production data migration and schema versioning while keeping the application stable — preserving data integrity in a defence-compliant environment.',
+    stack: ['Migrations', 'Schema Versioning', 'PostgreSQL'],
   },
 ];
 
@@ -133,21 +178,23 @@ function Home() {
 
             <motion.p className="hero-kicker" variants={staggerItem}>
               <Terminal size={12} strokeWidth={2} className="hero-kicker-icon" aria-hidden="true" />
-              <span>Backend Engineer · Node.js · Python</span>
+              <span>Backend Engineer · FastAPI · Python · PostgreSQL</span>
             </motion.p>
 
             <motion.h1 className="hero-title" variants={staggerItem}>
-              <span>Backend Developer</span>
-              <span>Scalable systems. Secure APIs. Real-world performance.</span>
+              <span>Backend Engineer</span>
+              <span>Secure REST APIs. Optimized databases. Production systems.</span>
             </motion.h1>
 
             <motion.p className="hero-subtitle" variants={staggerItem}>
-              Building production-ready APIs with Node.js &amp; Python, focused
-              on performance, caching, and secure system design.
+              I build production-grade backend systems for defence and
+              enterprise applications — REST APIs, PostgreSQL/PostGIS
+              optimization, JWT/RBAC auth, and Redis caching that hold up in
+              real deployments.
             </motion.p>
 
             <motion.p className="hero-highlight-line" variants={staggerItem}>
-              Node.js • Python • FastAPI • PostgreSQL • Redis • Docker • RBAC
+              FastAPI • Python • PostgreSQL • PostGIS • SQLAlchemy • Redis • JWT • RBAC
             </motion.p>
 
             <motion.div className="hero-cta" variants={staggerItem}>
@@ -208,8 +255,8 @@ function Home() {
             </motion.div>
 
             <motion.p className="hero-credibility" variants={staggerItem}>
-              1+ year experience • Built production-ready systems •
-              Performance-focused
+              1+ year experience • Defence &amp; enterprise production systems •
+              Secure backend architecture
             </motion.p>
           </motion.div>
 
@@ -254,8 +301,8 @@ function Home() {
                 </div>
                 <strong className="hero-status-value">Defence Intelligence Platform</strong>
                 <div className="hero-status-metrics">
-                  <span><em>120ms</em> p95 API</span>
-                  <span><em>99.9%</em> uptime</span>
+                  <span><em>800+</em> users</span>
+                  <span><em>PostGIS</em> GIS backend</span>
                 </div>
               </motion.div>
 
@@ -273,8 +320,9 @@ function Home() {
             <span className="trust-kicker">Trust Layer</span>
             <h2 className="trust-title">Proven Engineering Impact</h2>
             <p className="trust-subtitle">
-              Built for recruiters who want fast proof: secure systems,
-              production delivery, and backend decisions that hold up in real use.
+              Concrete backend work shipped to production — secure auth, GIS
+              services, tuned databases, and deployments that hold up under
+              real defence and enterprise workloads.
             </p>
           </div>
 
@@ -315,6 +363,41 @@ function Home() {
       <About />
       <main>
         <Projects />
+
+        <section className="chal-section" aria-label="Engineering challenges solved">
+          <div className="chal-shell">
+            <div className="chal-heading">
+              <span className="chal-kicker">Engineering Challenges Solved</span>
+              <h2 className="chal-title">Hard problems, shipped.</h2>
+              <p className="chal-subtitle">
+                Real backend problems I worked through in production — from
+                database internals to secure auth and GIS. Each one is a decision
+                that made the system faster, safer, or more scalable.
+              </p>
+            </div>
+
+            <div className="chal-grid">
+              {engineeringChallenges.map(({ Icon, tag, title, body, stack }) => (
+                <article key={title} className="chal-card">
+                  <div className="chal-card-top">
+                    <span className="chal-card-icon" aria-hidden="true">
+                      <Icon size={18} strokeWidth={1.6} />
+                    </span>
+                    <span className="chal-card-tag">{tag}</span>
+                  </div>
+                  <h3 className="chal-card-title">{title}</h3>
+                  <p className="chal-card-body">{body}</p>
+                  <div className="chal-card-stack">
+                    {stack.map((s) => (
+                      <span key={s} className="chal-card-chip">{s}</span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <Skills />
         <Contact />
       </main>

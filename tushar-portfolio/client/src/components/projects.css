@@ -335,6 +335,35 @@
   margin-bottom: 10px;
 }
 
+/* ── Case-study blocks (problem / approach / outcomes / implementation) ── */
+.pj-case { margin-bottom: 16px; }
+
+.pj-case-label {
+  display: block;
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(216, 207, 188, 0.42);
+  margin-bottom: 7px;
+}
+.pj-case-label--accent { color: var(--copper, #C9956C); }
+
+.pj-case-text {
+  font-family: var(--font-mono, 'DM Mono', monospace);
+  font-size: 12px;
+  line-height: 1.75;
+  color: rgba(216, 207, 188, 0.6);
+  margin: 0;
+}
+
+.pj-case .pj-summary,
+.pj-case .pj-summary--featured { margin-bottom: 0; }
+
+/* Standalone labels above proof/bullet lists */
+.pj-proof-list + .pj-case-label,
+.pj-bullet-list + .pj-case-label { margin-top: 4px; }
+
 /* ── Title ── */
 .pj-title {
   font-family: var(--font-display, 'Playfair Display', serif);

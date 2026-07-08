@@ -78,24 +78,25 @@ function About() {
   const experiences = [
     {
       company:  'UPSALA DefSol & IT Services Pvt. Ltd.',
-      role:     'Backend Developer',
+      role:     'Backend Engineer',
       duration: 'Sep 2025 – Present',
       location: 'New Delhi',
       type:     'Full-time',
-      impact:   'Indian Army · Prod',
-      highlights: ['RBAC Implementation', 'PostgreSQL Optimization', 'Hierarchical Data Handling', 'API Integration'],
+      impact:   '800+ users · Prod',
+      highlights: ['Secure REST APIs', 'PostGIS / GeoAlchemy2', 'JWT · RBAC · IAM', 'Redis + Migration'],
       description: [
-        'Architecting secure REST APIs for a defence-grade intelligence and operations platform deployed at the Indian Army PMO office — handling sensitive multi-unit operational data at production scale.',
-        'Designed a multi-tier RBAC system enforcing strict unit-level data isolation — no unit can access another\'s data — combined with a hierarchical approval workflow where actions escalate upward through command tiers before execution.',
-        'Optimised PostgreSQL schemas for large-scale operational datasets visualised on real-time maps; executed database migrations and schema versioning under defence-compliant production protocols.',
-        'Built modular Angular + Next.js frontend components for real-time operational dashboards, integrating internal department APIs under strict data security constraints.',
+        'Developed secure REST APIs for a defence-grade intelligence platform supporting 800+ internal users across hierarchical military organizations.',
+        'Designed authentication and authorization with JWT, refresh tokens, RBAC, and IAM integration for secure enterprise access with strict unit-level data isolation.',
+        'Built GIS-enabled backend services using PostgreSQL, PostGIS, SQLAlchemy, and GeoAlchemy2 for dashboards, reports, and operational mapping.',
+        'Optimized PostgreSQL queries with joins, indexing, and recursive hierarchical queries, improving backend scalability and response time.',
+        'Implemented Redis caching, backend optimizations, and production data migration while ensuring application stability across the full software lifecycle.',
       ],
-      technologies: ['FastAPI', 'PostgreSQL', 'Python', 'JWT', 'RBAC', 'Angular', 'Next.js'],
+      technologies: ['FastAPI', 'Python', 'PostgreSQL', 'PostGIS', 'SQLAlchemy', 'GeoAlchemy2', 'Redis', 'JWT', 'RBAC', 'IAM', 'Angular', 'Next.js'],
       achievements: [
-        { label: 'RBAC model',     value: 'Multi-tier'    },
-        { label: 'Approval chain', value: 'Hierarchical'  },
-        { label: 'Data isolation', value: 'Unit-level'    },
-        { label: 'Deployment',     value: 'Army · Prod'   },
+        { label: 'Users served',   value: '800+'       },
+        { label: 'Auth',           value: 'JWT · RBAC' },
+        { label: 'GIS backend',    value: 'PostGIS'    },
+        { label: 'Deployment',     value: 'Defence'    },
       ],
     },
     {
@@ -104,20 +105,20 @@ function About() {
       duration: 'Jun 2024 – Aug 2025',
       location: 'Gurugram',
       type:     'Internship',
-      impact:   '1,000+ daily users',
-      highlights: ['Workflow Automation', 'System Delivery', 'Role-Based Access', 'Analytics Dashboard'],
+      impact:   '1,000+ users · Deployed',
+      highlights: ['Java Desktop App', 'Deployed School ERP', 'Role-Based Access', 'Backend APIs'],
       description: [
-        'Designed full system UI in Figma, then built a desktop Library Management System using Electron.js + React.js — automating book issuance, returns, overdue fine calculation, and reporting, cutting manual effort by ~85%.',
-        'Integrated Excel import/export via SheetJS for bulk student and book inventory data management, eliminating manual entry workflows entirely.',
-        'Built and deployed the official LKCS school website on the MERN stack — serving 1,000+ daily users — with Cloudinary media management, MongoDB Atlas, GoDaddy domain on Vercel + Render.',
-        'Implemented role-based access with secure login for staff, librarians, and administrators; built interactive analytics dashboards for real-time library and school data.',
+        'Designed, developed, and deployed a Java desktop Library Management application — managing inventory, book issuance, returns, and fine calculation for daily library operations.',
+        'Implemented Excel import/export for bulk record management and automated administrative workflows, reducing manual effort by approximately 85%.',
+        'Designed, built, and deployed a full-stack school management platform (ERP) serving 1,000+ users, with backend APIs for student management, events, enquiries, complaints, and content management.',
+        'Implemented secure role-based access for staff, librarians, and administrators, and optimized backend APIs for improved responsiveness.',
       ],
-      technologies: ['React.js', 'Node.js', 'Express.js', 'SQLite', 'MongoDB', 'Electron.js', 'SheetJS', 'Figma', 'Cloudinary'],
+      technologies: ['Java', 'Apache POI', 'SQLite', 'Node.js', 'Express.js', 'MongoDB', 'React.js', 'Cloudinary', 'Figma'],
       achievements: [
-        { label: 'Admin effort cut', value: '~85%'      },
-        { label: 'Daily users',      value: '1,000+'    },
-        { label: 'Pipeline',         value: 'Figma→Prod'},
-        { label: 'Stack',            value: 'MERN'      },
+        { label: 'Admin effort cut', value: '~85%'       },
+        { label: 'Users served',     value: '1,000+'     },
+        { label: 'Library app',      value: 'Java'       },
+        { label: 'Delivery',         value: 'Deployed'   },
       ],
     },
     {
@@ -199,9 +200,11 @@ function About() {
 
           <div className="ab-intro-right">
             <p className="ab-intro-body">
-              I build backend systems focused on scalability, performance, and
-              security — from API design and database optimization to handling
-              complex data flows in production environments.
+              Backend Engineer with 1+ years building production-grade systems
+              for defence and enterprise applications. I work across REST API
+              development, PostgreSQL/PostGIS optimization, SQLAlchemy &amp;
+              GeoAlchemy2, JWT/RBAC authentication, Redis caching, and secure
+              backend architecture — currently deepening Java and Spring Boot.
             </p>
 
             <div className="ab-stats-row">
@@ -224,10 +227,10 @@ function About() {
                 <h3 className="ab-why-hire-title">Backend strength, built for production.</h3>
               </div>
               <ul className="ab-why-hire-list">
-                <li>Strong backend fundamentals across Node.js and Python.</li>
-                <li>Experience building production-ready APIs and secure role-based systems.</li>
-                <li>Focus on performance, scalability, and maintainable architecture.</li>
-                <li>Comfortable owning delivery from system design to deployment.</li>
+                <li>Ship secure REST APIs in Python/FastAPI and Node.js for real, high-stakes users.</li>
+                <li>Optimize PostgreSQL/PostGIS with indexing, joins, and recursive queries.</li>
+                <li>Own auth end to end — JWT, refresh tokens, RBAC, and IAM.</li>
+                <li>Deliver from schema design and caching to production migration and deployment.</li>
               </ul>
             </div>
           </div>
@@ -342,7 +345,23 @@ function About() {
           <div className="ab-section-label ab-section-label--inline">
             <span className="ab-label-num">03</span>
             <span className="ab-label-line" />
-            <span className="ab-label-text">Certifications</span>
+            <span className="ab-label-text">Education &amp; Certifications</span>
+          </div>
+
+          <div className="ab-edu">
+            {[
+              { degree: 'Master of Computer Applications', school: 'Guru Gobind Singh Indraprastha University', year: '2025', gpa: 'GPA 8.3 / 10' },
+              { degree: 'Bachelor of Computer Applications', school: 'Guru Gobind Singh Indraprastha University', year: '2022', gpa: 'GPA 8.4 / 10' },
+            ].map((e) => (
+              <div className="ab-edu-item" key={e.degree}>
+                <div className="ab-edu-top">
+                  <span className="ab-edu-year">{e.year}</span>
+                  <span className="ab-edu-gpa">{e.gpa}</span>
+                </div>
+                <h4 className="ab-edu-degree">{e.degree}</h4>
+                <p className="ab-edu-school">{e.school}</p>
+              </div>
+            ))}
           </div>
 
           <div className="cert-container" ref={certContainerRef}>

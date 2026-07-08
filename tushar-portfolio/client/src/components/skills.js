@@ -9,71 +9,81 @@ function Skills() {
     { id: 'all', label: 'All Skills', num: '00' },
     { id: 'lang', label: 'Languages', num: '01' },
     { id: 'backend', label: 'Backend', num: '02' },
-    { id: 'frontend', label: 'Frontend', num: '03' },
-    { id: 'database', label: 'Databases', num: '04' },
-    { id: 'devops', label: 'DevOps & Tools', num: '05' },
-    { id: 'concepts', label: 'Concepts', num: '06' },
+    { id: 'database', label: 'Databases', num: '03' },
+    { id: 'orm', label: 'ORM', num: '04' },
+    { id: 'concepts', label: 'Security & Auth', num: '05' },
+    { id: 'devops', label: 'Caching & Tools', num: '06' },
+    { id: 'frontend', label: 'Frontend', num: '07' },
   ];
 
   const skills = [
-    { name: 'JavaScript', cat: 'lang', level: 'Expert' },
+    // Languages
     { name: 'Python', cat: 'lang', level: 'Proficient' },
+    { name: 'JavaScript', cat: 'lang', level: 'Expert' },
     { name: 'SQL', cat: 'lang', level: 'Proficient' },
+    { name: 'Java', cat: 'lang', level: 'Proficient' },
     { name: 'TypeScript', cat: 'lang', level: 'Familiar' },
     { name: 'C#', cat: 'lang', level: 'Familiar' },
-    { name: 'HTML5', cat: 'lang', level: 'Expert' },
-    { name: 'CSS3', cat: 'lang', level: 'Expert' },
 
-    { name: 'Node.js', cat: 'backend', level: 'Expert' },
+    // Backend
     { name: 'FastAPI', cat: 'backend', level: 'Expert' },
+    { name: 'Node.js', cat: 'backend', level: 'Expert' },
     { name: 'Express.js', cat: 'backend', level: 'Expert' },
     { name: 'REST API Design', cat: 'backend', level: 'Expert' },
-    { name: 'ASP.NET MVC', cat: 'backend', level: 'Familiar' },
-    { name: 'Microservices', cat: 'backend', level: 'Proficient' },
     { name: 'Swagger / OpenAPI', cat: 'backend', level: 'Proficient' },
-    { name: 'OAuth', cat: 'backend', level: 'Proficient' },
+    { name: 'ASP.NET MVC', cat: 'backend', level: 'Familiar' },
 
-    { name: 'React.js', cat: 'frontend', level: 'Expert' },
-    { name: 'Next.js', cat: 'frontend', level: 'Expert' },
-    { name: 'Angular', cat: 'frontend', level: 'Expert' },
-    { name: 'Tailwind CSS', cat: 'frontend', level: 'Expert' },
-    { name: 'Electron.js', cat: 'frontend', level: 'Proficient' },
-
+    // Databases
     { name: 'PostgreSQL', cat: 'database', level: 'Expert' },
-    { name: 'MongoDB', cat: 'database', level: 'Expert' },
+    { name: 'PostGIS', cat: 'database', level: 'Proficient' },
     { name: 'MySQL', cat: 'database', level: 'Proficient' },
+    { name: 'MongoDB', cat: 'database', level: 'Proficient' },
     { name: 'SQLite', cat: 'database', level: 'Proficient' },
-    { name: 'MongoDB Atlas', cat: 'database', level: 'Proficient' },
     { name: 'Schema Design', cat: 'database', level: 'Expert' },
-    { name: 'Query Optimisation', cat: 'database', level: 'Proficient' },
+    { name: 'Query Optimization', cat: 'database', level: 'Proficient' },
+    { name: 'Recursive Queries', cat: 'database', level: 'Proficient' },
 
-    { name: 'Git', cat: 'devops', level: 'Expert' },
-    { name: 'Postman', cat: 'devops', level: 'Expert' },
-    { name: 'Figma', cat: 'devops', level: 'Proficient' },
-    { name: 'CI/CD', cat: 'devops', level: 'Familiar' },
-    { name: 'Unit Testing', cat: 'devops', level: 'Proficient' },
-    { name: 'Vercel', cat: 'devops', level: 'Expert' },
-    { name: 'Render', cat: 'devops', level: 'Proficient' },
-    { name: 'Cloudinary', cat: 'devops', level: 'Proficient' },
-    { name: 'SheetJS / xlsx', cat: 'devops', level: 'Proficient' },
-    { name: 'Razorpay', cat: 'devops', level: 'Proficient' },
-    { name: 'Nodemailer / SMTP', cat: 'devops', level: 'Proficient' },
+    // ORM
+    { name: 'SQLAlchemy', cat: 'orm', level: 'Proficient' },
+    { name: 'GeoAlchemy2', cat: 'orm', level: 'Proficient' },
 
-    { name: 'JWT Authentication', cat: 'concepts', level: 'Expert' },
+    // Security & Auth
+    { name: 'JWT', cat: 'concepts', level: 'Expert' },
     { name: 'RBAC', cat: 'concepts', level: 'Expert' },
-    { name: 'System Design', cat: 'concepts', level: 'Proficient' },
-    { name: 'Database Normalisation', cat: 'concepts', level: 'Expert' },
+    { name: 'Refresh Tokens', cat: 'concepts', level: 'Proficient' },
+    { name: 'IAM', cat: 'concepts', level: 'Proficient' },
     { name: 'Secure Architecture', cat: 'concepts', level: 'Expert' },
     { name: 'API Performance', cat: 'concepts', level: 'Expert' },
-    { name: 'Responsive Design', cat: 'concepts', level: 'Proficient' },
-    { name: 'Real-time Dashboards', cat: 'concepts', level: 'Proficient' },
+
+    // Caching & Tools
+    { name: 'Redis', cat: 'devops', level: 'Proficient' },
+    { name: 'Docker', cat: 'devops', level: 'Familiar' },
+    { name: 'Git', cat: 'devops', level: 'Expert' },
+    { name: 'Postman', cat: 'devops', level: 'Expert' },
+    { name: 'CI/CD', cat: 'devops', level: 'Familiar' },
+    { name: 'Vercel', cat: 'devops', level: 'Expert' },
+    { name: 'Render', cat: 'devops', level: 'Proficient' },
+
+    // Frontend
+    { name: 'React.js', cat: 'frontend', level: 'Expert' },
+    { name: 'Angular', cat: 'frontend', level: 'Proficient' },
+    { name: 'Next.js', cat: 'frontend', level: 'Proficient' },
+  ];
+
+  const currentlyLearning = [
+    { name: 'Java', note: 'Deepening core Java & OOP for backend services' },
+    { name: 'Spring Boot', note: 'REST APIs, DI, and enterprise service patterns' },
+    { name: 'Docker', note: 'Containerizing backends for reproducible deploys' },
+    { name: 'AWS', note: 'Cloud compute, deployment, and managed data services' },
+    { name: 'Kafka', note: 'Event streaming and async, decoupled architectures' },
+    { name: 'AI Engineering', note: 'LLM apps, RAG, and AI-augmented backends' },
   ];
 
   const stats = [
     { value: '1+', label: 'Years Experience' },
     { value: '4', label: 'Production Projects' },
-    { value: '42+', label: 'Skills & Tools' },
-    { value: 'MERN', label: 'Primary Stack' },
+    { value: '35+', label: 'Skills & Tools' },
+    { value: 'FastAPI', label: 'Core Backend' },
   ];
 
   const filtered = activeCategory === 'all'
@@ -110,13 +120,14 @@ function Skills() {
           <span className="sk-heading-italic"> bring.</span>
         </h2>
         <p className="sk-sub">
-          Full-stack engineer focused on secure backend systems, clean API design,
-          and production-grade databases — with strong frontend range to ship complete products end-to-end.
+          Backend engineer focused on secure REST APIs, PostgreSQL/PostGIS
+          optimization, ORM-driven data layers, and caching — organized the way
+          I actually use them in production.
         </p>
       </div>
 
       <p className={`sk-context ${isVisible ? 'sk-visible' : ''}`}>
-        Core backend technologies and tools I use to build scalable systems.
+        Backend-first stack, grouped by how it maps to real system layers.
       </p>
 
       <div className={`sk-filters ${isVisible ? 'sk-visible' : ''}`}>
@@ -146,6 +157,22 @@ function Skills() {
             <span className="sk-skill-name">{skill.name}</span>
           </div>
         ))}
+      </div>
+
+      <div className={`sk-learning ${isVisible ? 'sk-visible' : ''}`}>
+        <div className="sk-learning-head">
+          <span className="sk-learning-pulse" aria-hidden="true" />
+          <span className="sk-learning-kicker">Currently Learning</span>
+          <span className="sk-learning-note">Actively leveling up — targeting product-scale backend engineering</span>
+        </div>
+        <div className="sk-learning-grid">
+          {currentlyLearning.map((item, i) => (
+            <div key={item.name} className="sk-learning-card" style={{ animationDelay: `${i * 60}ms` }}>
+              <span className="sk-learning-name">{item.name}</span>
+              <span className="sk-learning-desc">{item.note}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className={`sk-legend ${isVisible ? 'sk-visible' : ''}`}>

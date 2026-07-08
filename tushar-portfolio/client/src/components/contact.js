@@ -80,8 +80,8 @@ function Contact() {
           </h2>
           <div className="ct-hero-right">
             <p className="ct-sub">
-              Open to Backend Developer roles • Immediate joiner • Let&apos;s
-              build scalable systems.
+              Open to Backend Engineer roles at product companies • Immediate
+              joiner • Let&apos;s build secure, scalable systems.
             </p>
             <div className="ct-avail">
               <span className="ct-avail-dot" />
@@ -197,7 +197,7 @@ function Contact() {
           {/* Left — name + role */}
           <div className="ft-left">
             <span className="ft-name">Tushar Sohal</span>
-            <span className="ft-role">Backend Developer</span>
+            <span className="ft-role">Backend Engineer</span>
           </div>
 
           {/* Centre — nav links */}

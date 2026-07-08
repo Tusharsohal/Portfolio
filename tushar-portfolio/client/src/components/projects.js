@@ -27,58 +27,62 @@ function Projects() {
     {
       id: 1,
       index: '01',
-      company: 'UPSALA DefSol — Indian Army',
-      title: 'Defence Intelligence & Operations Platform',
+      company: 'UPSALA — Defence & Intelligence',
+      title: 'Defence-Grade Intelligence Platform',
+      problem:
+        'A defence intelligence platform needed secure, role-scoped REST APIs and GIS data serving 800+ users across a strict military hierarchy — with zero cross-unit data leakage.',
       summary:
-        'Built a defence-grade operations platform for secure multi-unit workflows, approval routing, and sensitive operational data handling.',
+        'Owned the backend: secure REST APIs, JWT/RBAC/IAM authentication, PostGIS-backed GIS services, and tuned PostgreSQL — deployed under defence-compliant production protocols.',
       label: 'Backend System • 800+ Users • Secure Environment',
       bullets: [
-        'Designed a multi-tier RBAC system for secure unit-level access control and zero cross-unit data leakage.',
-        'Built FastAPI-based REST APIs for workflow approvals, operational records, and map-linked intelligence modules.',
-        'Optimized PostgreSQL schemas and query paths for large operational datasets used in real-time dashboards.',
-        'Enforced approval chains at the API layer so field-level actions moved through command hierarchy before execution.',
+        'Developed secure REST APIs with JWT, refresh tokens, RBAC, and IAM enforcing strict unit-level data isolation.',
+        'Built GIS-enabled backend services with PostGIS, SQLAlchemy, and GeoAlchemy2 for dashboards, reports, and operational mapping.',
+        'Optimized PostgreSQL using joins, indexing, and recursive hierarchical queries to improve scalability and response time.',
+        'Implemented Redis caching and executed production data migration with schema versioning while keeping the system stable.',
       ],
       proof: [
-        'RBAC implemented',
-        'Defence production deployment',
-        'Sensitive data isolation',
-        'Workflow approvals enforced',
+        '800+ users served',
+        'Unit-level data isolation',
+        'PostGIS GIS backend',
+        'Defence-grade deployment',
       ],
-      techLabel: 'Tech: FastAPI, PostgreSQL, Python, JWT, RBAC, Angular, Next.js',
-      tech: ['FastAPI', 'PostgreSQL', 'Python', 'JWT', 'RBAC', 'Angular', 'Next.js'],
+      techLabel: 'Tech: FastAPI, Python, PostgreSQL, PostGIS, SQLAlchemy, GeoAlchemy2, Redis, JWT, RBAC',
+      tech: ['FastAPI', 'Python', 'PostgreSQL', 'PostGIS', 'SQLAlchemy', 'GeoAlchemy2', 'Redis', 'JWT', 'RBAC'],
       security: true,
       restricted: true,
       type: 'Production',
       featured: true,
-      environment: 'Indian Army · Controlled Deployment',
+      environment: 'Defence · Controlled Deployment',
       liveUrl: null,
       githubUrl: null,
     },
     {
       id: 2,
       index: '02',
-      company: 'The Kapda Company — Personal Project',
-      title: 'Custom Apparel E-Commerce Platform',
+      company: 'The Kapda Company',
+      title: 'Multi-Role Custom Apparel Platform',
+      problem:
+        'A custom-apparel store needed one platform serving four different roles — customers, sellers, designers, and admins — with real payments and product personalization.',
       summary:
-        'Shipped a live commerce platform for customizable apparel with secure payments, multi-role access, and order workflows.',
+        'Designed and built a multi-role e-commerce backend: REST APIs for catalog and orders, RBAC across all four roles, Razorpay payments, and a dynamic product customization engine.',
       label: 'Multi-role System • RBAC • Payment Integration',
       bullets: [
-        'Built a Node.js and Express backend powering product customization, checkout flows, and order lifecycle management.',
-        'Implemented 4-role RBAC for admin, designer, seller, and customer workflows across the full platform.',
-        'Integrated Razorpay and email notifications for production-ready payment confirmations and order communication.',
-        'Documented backend APIs with Swagger to improve testing, onboarding, and future feature delivery.',
+        'Built REST APIs for authentication, product catalog, order management, and user administration.',
+        'Implemented Role-Based Access Control across customer, seller, designer, and admin roles.',
+        'Integrated the Razorpay payment gateway for production-ready payment flows.',
+        'Developed dynamic product customization letting users personalize apparel with images and text.',
       ],
       proof: [
         '4-role RBAC',
-        'Payment gateway integrated',
-        'Live production project',
-        'Swagger-documented APIs',
+        'Razorpay integrated',
+        'Live deployment',
+        'Custom product engine',
       ],
       techLabel: 'Tech: Node.js, Express, PostgreSQL, JWT, Razorpay, React',
       tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'JWT', 'Razorpay'],
       security: true,
       restricted: false,
-      type: 'Personal · Live',
+      type: 'Live',
       featured: false,
       environment: 'Live · kapdaco.vercel.app',
       liveUrl: 'https://kapdaco.vercel.app',
@@ -88,60 +92,64 @@ function Projects() {
       id: 3,
       index: '03',
       company: 'Lord Krishna Convent School',
-      title: 'Library Management System',
+      title: 'School Management Platform (ERP)',
+      problem:
+        'Lord Krishna Convent School ran operations by hand with no unified system for students, events, enquiries, and public content across 1,000+ users.',
       summary:
-        'Delivered a desktop workflow system that replaced manual library administration with faster, more reliable operations.',
-      label: 'Desktop System • Automation • Rule-based Logic',
+        'Designed, built, and deployed a full-stack school management ERP with secure role-based access and backend APIs for every operational workflow.',
+      label: 'Production ERP • 1,000+ Users • Role-Based Access',
       bullets: [
-        'Built an Electron-based library management system for book issuance, returns, overdue tracking, and reporting.',
-        'Automated administrative workflows that reduced manual effort by about 85 percent.',
-        'Integrated SheetJS-based bulk import and export for student records and book inventory operations.',
-        'Designed the full product flow in Figma and shipped it into production as a freelance desktop application.',
+        'Developed backend APIs for student management, events, enquiries, complaints, and content management.',
+        'Implemented secure role-based access for staff, librarians, and administrators.',
+        'Optimized backend APIs for improved responsiveness across operational dashboards.',
+        'Deployed and maintained a live production platform serving 1,000+ users.',
       ],
       proof: [
-        '85% admin effort reduced',
-        'Desktop production app',
-        'Bulk Excel workflows',
-        'End-to-end freelance delivery',
+        '1,000+ users',
+        'Role-based access',
+        'Deployed & live',
+        'Backend ERP APIs',
       ],
-      techLabel: 'Tech: Electron.js, React, Node.js, SQLite, SheetJS, Figma',
-      tech: ['Electron.js', 'React.js', 'Node.js', 'SQLite', 'SheetJS', 'Figma'],
+      techLabel: 'Tech: Node.js, Express, MongoDB, Cloudinary, React, Vercel',
+      tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Cloudinary', 'Vercel'],
       security: false,
       restricted: false,
-      type: 'Freelance',
+      type: 'Deployed',
       featured: false,
-      environment: 'Institutional · LKCS Gurugram',
-      liveUrl: null,
+      environment: 'Production · lordkrishnaconventschool.com',
+      liveUrl: 'https://lordkrishnaconventschool.com',
       githubUrl: 'https://github.com/Tusharsohal?tab=repositories',
     },
     {
       id: 4,
       index: '04',
       company: 'Lord Krishna Convent School',
-      title: 'School Website & Management Platform',
+      title: 'Library Management Desktop App',
+      problem:
+        'The school library was run by hand — issuance, returns, inventory, and fines all tracked on paper and spreadsheets, costing hours of manual admin work.',
       summary:
-        'Built and maintained a production platform for school operations, role-based access, and public-facing content delivery.',
-      label: 'Production System • 1000+ Users • Admin Panel',
+        'Built and deployed a Java desktop application that automated the full library workflow, cutting manual administrative effort by approximately 85%.',
+      label: 'Java Desktop App • Automation • Deployed',
       bullets: [
-        'Built MERN-based backend workflows for school operations, staff access, and content management.',
-        'Implemented role-based access for staff, librarians, and admins across operational dashboards.',
-        'Optimized MongoDB queries and backend API paths, reducing page load time by around 35 percent.',
-        'Supported a live system serving 1,000 plus daily users with stable production deployment.',
+        'Designed, developed, and deployed a Java desktop application to manage inventory, book issuance, returns, and fine calculation.',
+        'Implemented Excel import/export for bulk record management and automated administrative workflows.',
+        'Reduced manual administrative effort by approximately 85% through end-to-end workflow automation.',
+        'Delivered as a deployed application used in daily school library operations.',
       ],
       proof: [
-        '1,000+ daily users',
-        '35% faster page loads',
-        'RBAC implemented',
-        'Production-ready system',
+        '85% admin effort cut',
+        'Java desktop app',
+        'Excel bulk import/export',
+        'Deployed & in use',
       ],
-      techLabel: 'Tech: Node.js, Express, MongoDB, Cloudinary, React, Vercel',
-      tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Cloudinary', 'Vercel'],
+      techLabel: 'Tech: Java, Swing, SQLite, Apache POI',
+      tech: ['Java', 'Swing', 'SQLite', 'Apache POI'],
       security: false,
       restricted: false,
-      type: 'Production',
+      type: 'Deployed',
       featured: false,
-      environment: 'Production · lordkrishnaconventschool.com',
-      liveUrl: 'https://lordkrishnaconventschool.com',
+      environment: 'Institutional · LKCS Gurugram',
+      liveUrl: null,
       githubUrl: 'https://github.com/Tusharsohal?tab=repositories',
     },
   ];
@@ -171,8 +179,9 @@ function Projects() {
           <span className="pj-heading-italic"> execution.</span>
         </h2>
         <p className="pj-sub">
-          Backend systems, production rollouts, and measurable engineering impact
-          presented the way recruiters scan: what I built, what improved, and what shipped.
+          Each project as an engineering case study — the problem, the approach,
+          how it was built, and what shipped. Backend systems and production
+          deployments, not marketing copy.
         </p>
       </div>
 
@@ -200,8 +209,19 @@ function Projects() {
               <p className="pj-company">{featured.company}</p>
               <h3 className="pj-title pj-title--featured">{featured.title}</h3>
               <p className="pj-classifier">{featured.label}</p>
-              <p className="pj-summary pj-summary--featured">{featured.summary}</p>
 
+              {featured.problem && (
+                <div className="pj-case">
+                  <span className="pj-case-label">Problem</span>
+                  <p className="pj-case-text">{featured.problem}</p>
+                </div>
+              )}
+              <div className="pj-case">
+                <span className="pj-case-label pj-case-label--accent">Approach</span>
+                <p className="pj-summary pj-summary--featured">{featured.summary}</p>
+              </div>
+
+              <span className="pj-case-label">Outcomes</span>
               <div className="pj-proof-list pj-proof-list--featured">
                 {featured.proof.map((item) => (
                   <span key={item} className="pj-proof-pill">{item}</span>
@@ -216,6 +236,7 @@ function Projects() {
             </div>
 
             <div className="pj-featured-right">
+              <span className="pj-case-label">Implementation</span>
               <ul className="pj-bullet-list">
                 {featured.bullets.map((bullet) => (
                   <li key={bullet}>
@@ -269,14 +290,26 @@ function Projects() {
             <p className="pj-company">{project.company}</p>
             <h3 className="pj-title">{project.title}</h3>
             <p className="pj-classifier">{project.label}</p>
-            <p className="pj-summary">{project.summary}</p>
 
+            {project.problem && (
+              <div className="pj-case">
+                <span className="pj-case-label">Problem</span>
+                <p className="pj-case-text">{project.problem}</p>
+              </div>
+            )}
+            <div className="pj-case">
+              <span className="pj-case-label pj-case-label--accent">Approach</span>
+              <p className="pj-summary">{project.summary}</p>
+            </div>
+
+            <span className="pj-case-label">Outcomes</span>
             <div className="pj-proof-list">
               {project.proof.map((item) => (
                 <span key={item} className="pj-proof-pill">{item}</span>
               ))}
             </div>
 
+            <span className="pj-case-label">Implementation</span>
             <ul className="pj-bullet-list">
               {project.bullets.map((bullet) => (
                 <li key={bullet}>

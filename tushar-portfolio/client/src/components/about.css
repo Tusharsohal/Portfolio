@@ -558,6 +558,56 @@
 }
 .ab-cert-wrap.ab-visible { opacity: 1; transform: none; }
 
+/* ── Education ── */
+.ab-edu {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+@media (max-width: 640px) { .ab-edu { grid-template-columns: 1fr; } }
+
+.ab-edu-item {
+  border: 1px solid rgba(216, 207, 188, 0.10);
+  border-left: 2px solid var(--copper);
+  border-radius: 10px;
+  background: rgba(216, 207, 188, 0.02);
+  padding: 20px 22px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.ab-edu-item:hover {
+  border-color: rgba(201, 149, 108, 0.35);
+  background: rgba(216, 207, 188, 0.04);
+}
+
+.ab-edu-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.ab-edu-year {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.1em;
+  color: var(--copper);
+}
+.ab-edu-gpa {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.06em;
+  color: rgba(216, 207, 188, 0.6);
+}
+.ab-edu-degree {
+  font-family: var(--font-sans);
+  font-size: 1.02rem; font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--floral);
+  margin-bottom: 4px;
+}
+.ab-edu-school {
+  font-size: 0.86rem;
+  color: rgba(216, 207, 188, 0.6);
+  line-height: 1.5;
+}
+
 /* ── Cert grid ── */
 .cert-container {
   display: grid;
